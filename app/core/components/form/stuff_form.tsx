@@ -5,7 +5,7 @@ type StuffFormProps = {
   title: string;
   item: string;
   type: "create" | "update";
-  data?: Fruit | null;
+  data?: Fruit | Fertilizer | Fuel;
   open: boolean;
   setOpen: (val: boolean) => void;
 };

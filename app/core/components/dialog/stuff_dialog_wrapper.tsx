@@ -33,7 +33,7 @@ export const StuffDialogWrapper: React.FC<StuffDialogWrapperProps> = (
         type="update"
         open={openEdit}
         setOpen={setOpenEdit}
-        data={selectedItem}
+        data={selectedItem!}
       />
       <DeleteDialog
         title={props.title}

@@ -5,7 +5,7 @@ import { Button } from "~/core/components/ui/button";
 
 import { TableAction } from "~/core/components/container/content_table/table_action";
 
-export const fuelColumns: ColumnDef<Fuel>[] = [
+export const fertilizerColumns: ColumnDef<Fertilizer>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => {
@@ -14,7 +14,7 @@ export const fuelColumns: ColumnDef<Fuel>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nama Bensin
+          Nama Pupuk
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
