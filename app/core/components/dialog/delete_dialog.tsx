@@ -35,7 +35,7 @@ export const DeleteDialog: React.FC<DeleteDialogProps> = (props) => {
             <input type="hidden" name="id" value={props.id} />
             <AlertDialogAction
               type="submit"
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-red-600 hover:bg-red-700 w-full"
               onClick={() => {
                 props.setOpen(false);
               }}

@@ -10,7 +10,7 @@ export const addFruit = async (
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOTlhZjc0Zi0yODE4LTQ0NzYtODQ1My0zNDQ1MmI0MDg3MDUiLCJpYXQiOjE3NDUzODkzMzksImV4cCI6MTc0NTQ3NTczOX0.-16qlFXajewy_dA18Cz44lZ9ogAoYGv7mkVcRdxYH6E",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOTlhZjc0Zi0yODE4LTQ0NzYtODQ1My0zNDQ1MmI0MDg3MDUiLCJpYXQiOjE3NDU0ODAwMTAsImV4cCI6MTc0NTU2NjQxMH0.gzKw78Y81fiK2zkfU4temR5-b85JSePQN35F_y2c-PY",
       },
       body: JSON.stringify(fruit),
     });
