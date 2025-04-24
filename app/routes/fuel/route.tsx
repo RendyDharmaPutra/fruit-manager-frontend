@@ -3,31 +3,32 @@ import { useActionData, useLoaderData } from "@remix-run/react";
 import { ContentTable } from "~/core/components/container/content_table/content_table";
 import { PageContainer } from "~/core/components/container/page_container";
 import { StuffDialogWrapper } from "~/core/components/dialog/stuff_dialog_wrapper";
-import { fruitColumns } from "~/features/fruit/lib/column";
-import { addFruit } from "~/features/fruit/lib/utils/add_fruit";
-import { deleteFruit } from "~/features/fruit/lib/utils/delete_fruit";
-import { getFruits } from "~/features/fruit/lib/utils/get_fruits";
-import { updateFruitAction } from "~/features/fruit/lib/utils/update_fruit";
+
+import { fuelColumns } from "~/features/fuel/lib/column";
+import { addFuel } from "~/features/fuel/lib/utils/add_fuel";
+import { deleteFuel } from "~/features/fuel/lib/utils/delete_fuel";
+import { getFuels } from "~/features/fuel/lib/utils/get_fuels";
+import { updateFuelAction } from "~/features/fuel/lib/utils/update_fuel";
 
 export async function loader() {
-  const res = await getFruits();
+  const res = await getFuels();
 
   return res;
 }
 
-export default function FruitPage() {
+export default function FuelPage() {
   const loaderData = useLoaderData<typeof loader>();
   const actionRes = useActionData<typeof action>();
 
   return (
     <PageContainer>
       <ContentTable
-        title="Buah"
+        title="Bensin"
         actionRes={actionRes}
-        columns={fruitColumns}
+        columns={fuelColumns}
         loaderData={loaderData}
       >
-        <StuffDialogWrapper title="Buah" />
+        <StuffDialogWrapper title="Bensin" />
       </ContentTable>
     </PageContainer>
   );
@@ -39,12 +40,12 @@ export async function action({ request }: ActionFunctionArgs) {
 
   switch (intent) {
     case "create":
-      const createFruit = {
+      const createFuel = {
         name: String(formData.get("name")),
         price: Number(formData.get("price")),
       };
 
-      return await addFruit(createFruit);
+      return await addFuel(createFuel);
 
     case "update":
       const updateId = Number(formData.get("id"));
@@ -54,12 +55,12 @@ export async function action({ request }: ActionFunctionArgs) {
         price: Number(formData.get("price")),
       };
 
-      return await updateFruitAction(updateId, updateFruit);
+      return await updateFuelAction(updateId, updateFruit);
 
     case "delete":
       const deleteId = Number(formData.get("id"));
 
-      return await deleteFruit(deleteId);
+      return await deleteFuel(deleteId);
 
     default:
       return {

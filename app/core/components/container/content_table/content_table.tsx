@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ContentTableBody } from "./content_table_body";
 import { ContentTableHeader } from "./content_table_header";
 import { ErrorAlert } from "../../dialog/error_alert";
-import { showToast } from "~/features/fruit/hooks/show_toast";
+import { showToast } from "~/core/lib/hooks/show_toast";
 
 type ContentTableProps<T, R> = {
   title: string;

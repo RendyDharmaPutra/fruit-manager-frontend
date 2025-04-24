@@ -1,37 +1,38 @@
 import { FormDialog } from "~/core/components/dialog/form_dialog";
 import { TextBox } from "~/core/components/form/text_box";
 
-type FruitFormProps = {
+type StuffFormProps = {
   title: string;
+  item: string;
   type: "create" | "update";
-  fruit?: Fruit | null;
+  data?: Fruit | null;
   open: boolean;
   setOpen: (val: boolean) => void;
 };
 
-export const FruitForm: React.FC<FruitFormProps> = (props) => {
+export const StuffForm: React.FC<StuffFormProps> = (props) => {
   return (
     <FormDialog
-      description="Masukkan Data Buah disini"
+      description={`Masukkan Data ${props.item} disini`}
       open={props.open}
       setOpen={props.setOpen}
-      title={`${props.title} Buah`}
+      title={`${props.title} ${props.item}`}
     >
       <input type="hidden" name="intent" value={props.type} />
-      <input type="hidden" name="id" value={props.fruit?.id ?? ""} />
+      <input type="hidden" name="id" value={props.data?.id ?? ""} />
       <TextBox
         id="name"
-        label="Nama Buah"
+        label={`Nama ${props.item}`}
         placeholder=""
         type="text"
-        defaultValue={props.fruit?.name ?? ""}
+        defaultValue={props.data?.name ?? ""}
       />
       <TextBox
         id="price"
-        label="Harga Buah"
+        label={`Harga ${props.item}`}
         placeholder=""
         type="number"
-        defaultValue={props.fruit?.price ?? ""}
+        defaultValue={props.data?.price ?? ""}
       />
     </FormDialog>
   );

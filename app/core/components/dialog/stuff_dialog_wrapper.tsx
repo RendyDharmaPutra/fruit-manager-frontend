@@ -1,4 +1,4 @@
-import { FruitForm } from "~/features/fruit/components/form/fruit_form";
+import { StuffForm } from "~/core/components/form/stuff_form";
 import { useAddDialog } from "~/core/lib/context/add_dialog_context";
 import { useEditDialog } from "~/core/lib/context/edit_dialog_context";
 import { useDeleteDialog } from "~/core/lib/context/delete_dialog_context";
@@ -20,18 +20,20 @@ export const StuffDialogWrapper: React.FC<StuffDialogWrapperProps> = (
 
   return (
     <>
-      <FruitForm
+      <StuffForm
         title="Tambah"
+        item={props.title}
         type="create"
         open={openAdd}
         setOpen={setOpenAdd}
       />
-      <FruitForm
+      <StuffForm
         title="Ubah"
+        item={props.title}
         type="update"
         open={openEdit}
         setOpen={setOpenEdit}
-        fruit={selectedItem}
+        data={selectedItem}
       />
       <DeleteDialog
         title={props.title}

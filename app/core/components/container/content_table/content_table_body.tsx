@@ -13,7 +13,7 @@ export const ContentTableBody: React.FC<ContentTableBodyProps> = (props) => {
   return (
     <>
       <section className="px-8 py-4 flex flex-col gap-4 w-full h-full ">
-        <ContentTableAdd title="Buah" />
+        <ContentTableAdd title={props.title} />
         <DataTable columns={props.columns} data={props.data} />
       </section>
       {props.children}
