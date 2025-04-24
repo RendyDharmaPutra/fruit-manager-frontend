@@ -14,7 +14,7 @@ export const AuthForm: React.FC<AuthFormProps> = () => {
       className="flex flex-col items-center gap-6 lg:gap-7 w-full "
     >
       <AuthInput />
-      <SubmitBtn />
+      <SubmitBtn title="Login" />
     </Form>
   );
 };

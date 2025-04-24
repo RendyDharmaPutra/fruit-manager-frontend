@@ -6,17 +6,19 @@ type TextBoxProps = {
   label: string;
   placeholder: string;
   type: React.HTMLInputTypeAttribute;
+  defaultValue?: string | number;
 };
 
 export const TextBox: React.FC<TextBoxProps> = (props) => {
   return (
-    <div className="flex flex-col gap-1.5 ">
+    <div className="flex flex-col items-start gap-1.5 ">
       <Label htmlFor={props.id}>{props.label}</Label>
       <Input
         type={props.type}
         id={props.id}
         name={props.id}
         placeholder={`Masukkan ${props.label}`}
+        defaultValue={props.defaultValue}
       />
     </div>
   );

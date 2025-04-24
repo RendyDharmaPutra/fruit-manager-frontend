@@ -2,9 +2,11 @@ import { useNavigation } from "@remix-run/react";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 
-type SubmitBtnProps = {};
+type SubmitBtnProps = {
+  title: string;
+};
 
-export const SubmitBtn: React.FC<SubmitBtnProps> = () => {
+export const SubmitBtn: React.FC<SubmitBtnProps> = (props) => {
   const { state } = useNavigation();
   const pending = state === "submitting";
 
@@ -15,7 +17,7 @@ export const SubmitBtn: React.FC<SubmitBtnProps> = () => {
       className={`w-full bg-primary ${pending && "bg-secondary"}`}
     >
       {pending && <Loader2 className="animate-spin" />}
-      Login
+      {props.title}
     </Button>
   );
 };
