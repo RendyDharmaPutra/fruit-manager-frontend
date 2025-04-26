@@ -3,14 +3,17 @@ import { useActionData, useLoaderData } from "@remix-run/react";
 import { ContentTable } from "~/core/components/container/content_table/content_table";
 import { PageContainer } from "~/core/components/container/page_container";
 import { StuffDialogWrapper } from "~/core/components/dialog/stuff_dialog_wrapper";
+import { dataAction } from "~/core/utils/data_action";
+import { fetchApi } from "~/core/utils/fetch_api";
 import { fruitColumns } from "~/features/fruit/lib/column";
-import { addFruit } from "~/features/fruit/lib/utils/add_fruit";
-import { deleteFruit } from "~/features/fruit/lib/utils/delete_fruit";
-import { getFruits } from "~/features/fruit/lib/utils/get_fruits";
-import { updateFruitAction } from "~/features/fruit/lib/utils/update_fruit";
 
-export async function loader() {
-  const res = await getFruits();
+export async function loader({ request }: LoaderFunctionArgs) {
+  const res = await fetchApi<Fruit, "GET">(
+    request,
+    "/fruit/",
+    "GET",
+    "mendapatkan data Buah"
+  );
 
   return res;
 }
@@ -35,37 +38,9 @@ export default function FruitPage() {
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const intent = formData.get("intent");
 
-  switch (intent) {
-    case "create":
-      const createFruit = {
-        name: String(formData.get("name")),
-        price: Number(formData.get("price")),
-      };
-
-      return await addFruit(createFruit);
-
-    case "update":
-      const updateId = Number(formData.get("id"));
-
-      const updateFruit = {
-        name: String(formData.get("name")),
-        price: Number(formData.get("price")),
-      };
-
-      return await updateFruitAction(updateId, updateFruit);
-
-    case "delete":
-      const deleteId = Number(formData.get("id"));
-
-      return await deleteFruit(deleteId);
-
-    default:
-      return {
-        success: false,
-        message: "Terjadi Kesalahan saat aksi",
-        error: "Terjadi Kesalahan tidak diketahui",
-      };
-  }
+  return await dataAction(request, formData, "fruit", "Buah", () => ({
+    name: String(formData.get("name")),
+    price: Number(formData.get("price")),
+  }));
 }

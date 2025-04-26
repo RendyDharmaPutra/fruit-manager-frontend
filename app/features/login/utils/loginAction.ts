@@ -1,24 +1,23 @@
+import { getApiEnv } from "~/core/utils/get_api_env";
+
 export const loginAction = async (
   user: User
 ): Promise<
-  SuccessResponseType<{token: string}> | FailedResponseType<string | { message: string }[]>
+  | SuccessResponseType<{ token: string }>
+  | FailedResponseType<string | FailedValidationType>
 > => {
-  const env = process.env.API_URL;
+  const env = getApiEnv();
+
   try {
-    const response = await fetch(`http://api:3000/auth/`, {
+    const response = await fetch(`${env}/auth/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwOTlhZjc0Zi0yODE4LTQ0NzYtODQ1My0zNDQ1MmI0MDg3MDUiLCJpYXQiOjE3NDUzODkzMzksImV4cCI6MTc0NTQ3NTczOX0.-16qlFXajewy_dA18Cz44lZ9ogAoYGv7mkVcRdxYH6E",
       },
       body: JSON.stringify(user),
     });
 
-    const res:
-      | SuccessResponseType<{token: string}>
-      | FailedResponseType<string | { message: string }[]> =
-      await response.json();
+    const res = await response.json();
 
     return res;
   } catch (err) {
@@ -27,6 +26,6 @@ export const loginAction = async (
       success: false,
       message: "Gagal mengautentikasi Pengguna",
       error: "Terjadi kesalahan tidak diketahui",
-    };
+    } as FailedResponseType<string>;
   }
 };

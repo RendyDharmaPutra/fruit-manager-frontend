@@ -3,7 +3,7 @@ import type { ActionFunctionArgs } from "@remix-run/node";
 import { loginAction } from "~/features/login/utils/loginAction";
 import { redirect, useActionData } from "@remix-run/react";
 import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
-import { authCookies } from "~/core/utils/cookie";
+import { authCookies } from "~/core/utils/auth/cookie";
 
 export default function Login() {
   const actionRes = useActionData<typeof action>();
@@ -35,5 +35,5 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  return res as FailedResponseType<{ message: string }[]>;
+  return res as FailedResponseType<string | FailedValidationType>;
 }
