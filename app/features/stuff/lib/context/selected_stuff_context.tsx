@@ -3,4 +3,4 @@ import { createSelectedItemContext } from "~/core/lib/context/selected_item_cont
 export const {
   SelectedItemProvider: SelectedStuffProvider,
   useSelectedItem: useSelectedStuff,
-} = createSelectedItemContext<Fruit>();
+} = createSelectedItemContext<StuffType>();

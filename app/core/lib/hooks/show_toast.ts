@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAddDialog } from "~/core/lib/context/add_dialog_context";
-import { useEditDialog } from "~/core/lib/context/edit_dialog_context";
+import { useAddDialog } from "~/core/lib/context/dialog_context/add_dialog_context";
+import { useEditDialog } from "~/core/lib/context/dialog_context/edit_dialog_context";
 import { toast } from "~/core/lib/hooks/use-toast";
 import {
   isFailedResponse,

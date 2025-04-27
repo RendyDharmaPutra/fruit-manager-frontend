@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 import { Button } from "../../ui/button";
-import { useAddDialog } from "~/core/lib/context/add_dialog_context";
+import { useAddDialog } from "~/core/lib/context/dialog_context/add_dialog_context";
 
 type ContentTableAddProps = {
   title: string;

@@ -7,10 +7,9 @@ import {
 } from "~/core/components/ui/dropdown-menu";
 import { Button } from "../../ui/button";
 import { MoreHorizontal, Pencil, Trash } from "lucide-react";
-import { useEditDialog } from "~/core/lib/context/edit_dialog_context";
-import { useDeleteDialog } from "~/core/lib/context/delete_dialog_context";
-import { useSelectedStuff } from "~/core/lib/context/selected_stuff_context";
-import { useEffect } from "react";
+import { useEditDialog } from "~/core/lib/context/dialog_context/edit_dialog_context";
+import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
+import { useSelectedStuff } from "~/features/stuff/lib/context/selected_stuff_context";
 
 type TableActionProps = {
   title: string;

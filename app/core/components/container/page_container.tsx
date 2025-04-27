@@ -1,7 +1,7 @@
-import { AddDialogProvider } from "~/core/lib/context/add_dialog_context";
-import { EditDialogProvider } from "~/core/lib/context/edit_dialog_context";
-import { DeleteDialogProvider } from "~/core/lib/context/delete_dialog_context";
-import { SelectedStuffProvider } from "~/core/lib/context/selected_stuff_context";
+import { AddDialogProvider } from "~/core/lib/context/dialog_context/add_dialog_context";
+import { EditDialogProvider } from "~/core/lib/context/dialog_context/edit_dialog_context";
+import { DeleteDialogProvider } from "~/core/lib/context/dialog_context/delete_dialog_context";
+import { SelectedStuffProvider } from "~/features/stuff/lib/context/selected_stuff_context";
 
 type PageContainerProps = {
   children: React.ReactNode;

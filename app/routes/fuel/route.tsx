@@ -2,13 +2,13 @@ import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { ContentTable } from "~/core/components/container/content_table/content_table";
 import { PageContainer } from "~/core/components/container/page_container";
-import { StuffDialogWrapper } from "~/core/components/dialog/stuff_dialog_wrapper";
+import { StuffDialogWrapper } from "~/features/stuff/components/stuff_dialog_wrapper";
 import { dataAction } from "~/core/utils/data_action";
 import { fetchApi } from "~/core/utils/fetch_api";
-import { fuelColumns } from "~/features/fuel/lib/column";
+import { stuffColumns } from "~/features/stuff/lib/column";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const res = await fetchApi<Fuel, "GET">(
+  const res = await fetchApi<StuffType, "GET">(
     request,
     "/fuel/",
     "GET",
@@ -27,7 +27,7 @@ export default function FuelPage() {
       <ContentTable
         title="Bensin"
         actionRes={actionRes}
-        columns={fuelColumns}
+        columns={stuffColumns}
         loaderData={loaderData}
       >
         <StuffDialogWrapper title="Bensin" />

@@ -1,9 +1,9 @@
-import { StuffForm } from "~/core/components/form/stuff_form";
-import { useAddDialog } from "~/core/lib/context/add_dialog_context";
-import { useEditDialog } from "~/core/lib/context/edit_dialog_context";
-import { useDeleteDialog } from "~/core/lib/context/delete_dialog_context";
-import { DeleteDialog } from "./delete_dialog";
-import { useSelectedStuff } from "~/core/lib/context/selected_stuff_context";
+import { StuffForm } from "~/features/stuff/components/stuff_form";
+import { useAddDialog } from "~/core/lib/context/dialog_context/add_dialog_context";
+import { useEditDialog } from "~/core/lib/context/dialog_context/edit_dialog_context";
+import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
+import { DeleteDialog } from "../../../core/components/dialog/delete_dialog";
+import { useSelectedStuff } from "~/features/stuff/lib/context/selected_stuff_context";
 
 type StuffDialogWrapperProps = {
   title: string;
