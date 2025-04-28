@@ -9,17 +9,15 @@ import { Button } from "../../ui/button";
 import { MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { useEditDialog } from "~/core/lib/context/dialog_context/edit_dialog_context";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
-import { useSelectedStuff } from "~/features/stuff/lib/context/selected_stuff_context";
 
-type TableActionProps = {
-  title: string;
-  data: any;
+type TableActionProps<T> = {
+  data: T;
+  setSelectedItem: (item: T | null) => void;
 };
 
-export const TableAction: React.FC<TableActionProps> = (props) => {
+export const TableAction = <T,>(props: TableActionProps<T>) => {
   const { setOpen: setOpenEdit } = useEditDialog();
   const { setOpen: setOpenDelete } = useDeleteDialog();
-  const { setSelectedItem } = useSelectedStuff();
 
   return (
     <DropdownMenu>
@@ -34,22 +32,22 @@ export const TableAction: React.FC<TableActionProps> = (props) => {
 
         <DropdownMenuItem
           onClick={() => {
-            setSelectedItem(props.data);
+            props.setSelectedItem(props.data);
             setOpenEdit(true);
           }}
         >
           <Pencil />
-          Ubah {props.title}
+          Ubah
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {
-            setSelectedItem(props.data);
+            props.setSelectedItem(props.data);
             setOpenDelete(true);
           }}
           className="text-danger"
         >
           <Trash />
-          Hapus {props.title}
+          Hapus
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

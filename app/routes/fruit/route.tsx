@@ -1,11 +1,11 @@
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
 import { ContentTable } from "~/core/components/container/content_table/content_table";
-import { PageContainer } from "~/core/components/container/page_container";
 import { StuffDialogWrapper } from "~/features/stuff/components/stuff_dialog_wrapper";
 import { dataAction } from "~/core/utils/data_action";
 import { fetchApi } from "~/core/utils/fetch_api";
 import { stuffColumns } from "~/features/stuff/lib/column";
+import { StuffPageContainer } from "~/features/stuff/components/stuff_page_container";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const res = await fetchApi<StuffType, "GET">(
@@ -23,7 +23,7 @@ export default function FruitPage() {
   const actionRes = useActionData<typeof action>();
 
   return (
-    <PageContainer>
+    <StuffPageContainer>
       <ContentTable
         title="Buah"
         actionRes={actionRes}
@@ -32,7 +32,7 @@ export default function FruitPage() {
       >
         <StuffDialogWrapper title="Buah" />
       </ContentTable>
-    </PageContainer>
+    </StuffPageContainer>
   );
 }
 

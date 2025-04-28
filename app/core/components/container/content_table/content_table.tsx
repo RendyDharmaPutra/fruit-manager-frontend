@@ -4,11 +4,13 @@ import { ContentTableHeader } from "./content_table_header";
 import { ErrorAlert } from "../../dialog/error_alert";
 import { showToast } from "~/core/lib/hooks/show_toast";
 
+type ItemType<T> = T extends (infer U)[] ? U : T;
+
 type ContentTableProps<T, R> = {
   title: string;
   loaderData: SuccessResponseType<T> | FailedResponseType<string>;
   actionRes: R | undefined;
-  columns: ColumnDef<any>[];
+  columns: ColumnDef<ItemType<T>>[];
   children: React.ReactNode;
 };
 

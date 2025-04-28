@@ -2,8 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
 import { Button } from "~/core/components/ui/button";
-
-import { TableAction } from "~/core/components/container/content_table/table_action";
+import { TableActionStuff } from "../components/table_action_stuff";
 
 export const stuffColumns: ColumnDef<StuffType>[] = [
   {
@@ -36,9 +35,9 @@ export const stuffColumns: ColumnDef<StuffType>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const fruit = row.original;
+      const data = row.original;
 
-      return <TableAction title="Bensin" data={fruit} />;
+      return <TableActionStuff data={data} />;
     },
   },
 ];
