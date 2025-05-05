@@ -8,6 +8,7 @@ export function createFormDialogContext() {
 
   const DialogProvider = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(false);
+
     return (
       <Context.Provider value={{ open, setOpen }}>{children}</Context.Provider>
     );

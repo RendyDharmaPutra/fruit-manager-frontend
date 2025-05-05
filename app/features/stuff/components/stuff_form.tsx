@@ -1,16 +1,22 @@
 import { FormDialog } from "~/core/components/dialog/form_dialog";
 import { TextBox } from "~/core/components/form/text_box";
+import { useErrorStuff } from "../lib/context/error_stuff_context";
+import { resetValidationError } from "~/core/lib/hooks/reset_validation_error";
 
 type StuffFormProps = {
   title: string;
   item: string;
   type: "create" | "update";
-  data?: Fruit | Fertilizer | Fuel;
+  data?: StuffType;
   open: boolean;
   setOpen: (val: boolean) => void;
 };
 
 export const StuffForm: React.FC<StuffFormProps> = (props) => {
+  const { validationError, setValidationError } = useErrorStuff();
+
+  resetValidationError(props.open, validationError, setValidationError);
+
   return (
     <FormDialog
       description={`Masukkan Data ${props.item} disini`}
@@ -26,6 +32,7 @@ export const StuffForm: React.FC<StuffFormProps> = (props) => {
         placeholder=""
         type="text"
         defaultValue={props.data?.name ?? ""}
+        error={validationError?.name}
       />
       <TextBox
         id="price"
@@ -33,6 +40,7 @@ export const StuffForm: React.FC<StuffFormProps> = (props) => {
         placeholder=""
         type="number"
         defaultValue={props.data?.price ?? ""}
+        error={validationError?.price}
       />
     </FormDialog>
   );

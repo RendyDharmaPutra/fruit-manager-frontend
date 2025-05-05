@@ -7,6 +7,7 @@ type TextBoxProps = {
   placeholder: string;
   type: React.HTMLInputTypeAttribute;
   defaultValue?: string | number;
+  error?: string[];
 };
 
 export const TextBox: React.FC<TextBoxProps> = (props) => {
@@ -20,6 +21,7 @@ export const TextBox: React.FC<TextBoxProps> = (props) => {
         placeholder={`Masukkan ${props.label}`}
         defaultValue={props.defaultValue}
       />
+      {props.error && <p className="text-xs text-danger">{props.error[0]}</p>}
     </div>
   );
 };

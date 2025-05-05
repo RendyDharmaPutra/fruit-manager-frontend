@@ -9,7 +9,7 @@ type ItemType<T> = T extends (infer U)[] ? U : T;
 type ContentTableProps<T, R> = {
   title: string;
   loaderData: SuccessResponseType<T> | FailedResponseType<string>;
-  actionRes: R | undefined;
+  actionRes?: R;
   columns: ColumnDef<ItemType<T>>[];
   children: React.ReactNode;
 };
