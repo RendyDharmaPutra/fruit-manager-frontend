@@ -12,6 +12,8 @@ export const updateValidationError = <
   actionRes?: T
 ) => {
   useEffect(() => {
+    setValidationError(null);
+
     if (
       actionRes && // Jika tidak undefined
       isFailedResponse(actionRes) && // Jika Merupakan Error

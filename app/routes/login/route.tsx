@@ -4,6 +4,7 @@ import { loginAction } from "~/features/login/utils/loginAction";
 import { redirect, useActionData } from "@remix-run/react";
 import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
 import { authCookies } from "~/core/utils/auth/cookie";
+import { LoginValidateProvider } from "~/features/login/context/error_stuff_context";
 
 export default function Login() {
   const actionRes = useActionData<typeof action>();
@@ -11,9 +12,11 @@ export default function Login() {
   actionRes !== undefined && showStandardToast(actionRes);
 
   return (
-    <div className="px-6 py-[156px] lg:p-0 flex flex-col items-center lg:center w-full h-screen ">
-      <AuthPage />
-    </div>
+    <LoginValidateProvider>
+      <div className="px-6 py-[156px] lg:p-0 flex flex-col items-center lg:center w-full h-screen ">
+        <AuthPage actionRes={actionRes} />
+      </div>
+    </LoginValidateProvider>
   );
 }
 
