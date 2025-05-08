@@ -1,5 +1,5 @@
 import { updateValidationError } from "~/core/lib/hooks/update_validation_error";
-import { useLoginValidate } from "../../context/error_stuff_context";
+import { useLoginValidate } from "../../context/login_validdate_error_context";
 import { AuthForm } from "../form/auth_form";
 
 type AuthPageProps<T> = {
