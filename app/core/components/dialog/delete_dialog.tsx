@@ -1,14 +1,4 @@
-import { Form } from "@remix-run/react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "~/core/components/ui/alert-dialog";
+import { CustomAlertDialog } from "./custom_alert_dialog";
 
 type DeleteDialogProps = {
   id: number;
@@ -19,32 +9,15 @@ type DeleteDialogProps = {
 
 export const DeleteDialog: React.FC<DeleteDialogProps> = (props) => {
   return (
-    <AlertDialog open={props.open} onOpenChange={props.setOpen}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Apakah anda yakin?</AlertDialogTitle>
-          <AlertDialogDescription>
-            Tindakan ini tidak dapat dibatalkan. {props.title} ini akan dihapus
-            secara permanen.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Batal</AlertDialogCancel>
-          <Form method="DELETE">
-            <input type="hidden" name="intent" value="delete" />
-            <input type="hidden" name="id" value={props.id} />
-            <AlertDialogAction
-              type="submit"
-              className="bg-red-600 hover:bg-red-700 w-full"
-              onClick={() => {
-                props.setOpen(false);
-              }}
-            >
-              Hapus
-            </AlertDialogAction>
-          </Form>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <CustomAlertDialog
+      actionName="Hapus"
+      description={` ${props.title} ini akan dihapus secara permanen.`}
+      method="DELETE"
+      open={props.open}
+      setOpen={props.setOpen}
+    >
+      <input type="hidden" name="intent" value="delete" />
+      <input type="hidden" name="id" value={props.id} />
+    </CustomAlertDialog>
   );
 };

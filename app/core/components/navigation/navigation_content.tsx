@@ -5,7 +5,6 @@ import {
 } from "@radix-ui/react-navigation-menu";
 import { NavigationItem } from "./navigation_item";
 import { NavigationListItem } from "./navigation_list_item";
-import { Form } from "@remix-run/react";
 
 const menuListItem = [
   {
@@ -21,8 +20,6 @@ const menuListItem = [
     route: "/fuel",
   },
 ];
-
-type NavigationContentProps = {};
 
 export const NavigationContent = (props: NavigationContentProps) => {
   return (
@@ -45,14 +42,14 @@ export const NavigationContent = (props: NavigationContentProps) => {
           </ul>
         </NavigationMenuContent>
       </NavigationMenuItem>
-      <Form action="/logout" method="post">
-        <button
-          type="submit"
-          className="navigation-item text-danger hover:bg-danger/10"
-        >
-          Logout
-        </button>
-      </Form>
+
+      <button
+        type="button"
+        onClick={() => props.setShowLogout((prev) => !prev)}
+        className="navigation-item text-danger hover:bg-danger/10"
+      >
+        Logout
+      </button>
     </>
   );
 };
