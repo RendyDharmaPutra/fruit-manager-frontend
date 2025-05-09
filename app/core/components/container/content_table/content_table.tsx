@@ -22,7 +22,7 @@ export const ContentTable = <T, R extends RawResponseType>(
   props.actionRes != undefined && showToast(props.actionRes);
 
   return (
-    <section className="flex flex-col gap-3 lg:gap-4 w-full flex-1 rounded-md border shadow-2xl">
+    <section className="flex flex-col gap-3 lg:gap-4 w-full flex-1 rounded-md border">
       <ContentTableHeader title={props.title} />
       {loaderData.success ? (
         <ContentTableBody

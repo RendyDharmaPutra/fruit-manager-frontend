@@ -9,6 +9,7 @@ import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 import { Toaster } from "./core/components/ui/toaster";
+import { NavigationBar } from "./core/components/navigation/navigation_bar";
 
 export const meta: MetaFunction = () => {
   return [
@@ -40,6 +41,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <NavigationBar />
         {children}
         <Toaster />
         <ScrollRestoration />
