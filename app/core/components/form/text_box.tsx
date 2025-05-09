@@ -8,11 +8,12 @@ type TextBoxProps = {
   type: React.HTMLInputTypeAttribute;
   defaultValue?: string | number;
   error?: string[];
+  children?: React.ReactNode;
 };
 
 export const TextBox: React.FC<TextBoxProps> = (props) => {
   return (
-    <div className="flex flex-col items-start gap-1.5 ">
+    <div className="relative flex flex-col items-start gap-1.5 ">
       <Label htmlFor={props.id}>{props.label}</Label>
       <Input
         type={props.type}
@@ -22,6 +23,7 @@ export const TextBox: React.FC<TextBoxProps> = (props) => {
         defaultValue={props.defaultValue}
       />
       {props.error && <p className="text-xs text-danger">{props.error[0]}</p>}
+      {props.children}
     </div>
   );
 };

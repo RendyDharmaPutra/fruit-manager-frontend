@@ -1,5 +1,6 @@
 import { TextBox } from "~/core/components/form/text_box";
 import { useLoginValidate } from "../../context/login_validdate_error_context";
+import { PasswordField } from "~/core/components/form/password_field";
 
 type AuthInputProps = {};
 
@@ -15,13 +16,7 @@ export const AuthInput: React.FC<AuthInputProps> = () => {
         type="text"
         error={validationError?.username}
       />
-      <TextBox
-        id="password"
-        label="Password"
-        placeholder="password"
-        type="password"
-        error={validationError?.password}
-      />
+      <PasswordField error={validationError?.password} />
     </section>
   );
 };
