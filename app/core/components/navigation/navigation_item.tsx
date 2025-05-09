@@ -8,7 +8,7 @@ type NavigationItemProps = {
 
 export const NavigationItem = (props: NavigationItemProps) => {
   return (
-    <NavigationMenuItem className="navigation-item">
+    <NavigationMenuItem asChild className="navigation-item">
       <Link to={props.route}>{props.name}</Link>
     </NavigationMenuItem>
   );

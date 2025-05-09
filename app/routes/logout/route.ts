@@ -1,5 +1,10 @@
-export async function loader() {
-  console.log("Hello");
+import { redirect } from "@remix-run/node";
+import { logout } from "~/core/utils/auth/logout";
 
-  return null;
+export async function loader() {
+  return redirect("/");
+}
+
+export async function action() {
+  return logout();
 }

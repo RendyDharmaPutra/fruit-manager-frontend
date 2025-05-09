@@ -45,8 +45,13 @@ export const NavigationContent = (props: NavigationContentProps) => {
           </ul>
         </NavigationMenuContent>
       </NavigationMenuItem>
-      <Form action="/logout" method="post" className="navigation-item">
-        <button type="submit">Logout</button>
+      <Form action="/logout" method="post">
+        <button
+          type="submit"
+          className="navigation-item text-danger hover:bg-danger/10"
+        >
+          Logout
+        </button>
       </Form>
     </>
   );
