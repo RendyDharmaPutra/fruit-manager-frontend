@@ -1,6 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "../../ui/data-table";
-import { ContentTableAdd } from "./content_table_add";
 
 type ContentTableBodyProps<T> = {
   title: string;
@@ -13,10 +12,9 @@ export const ContentTableBody = <T,>(props: ContentTableBodyProps<T>) => {
   return (
     <>
       <section className="px-8 py-4 flex flex-col gap-4 w-full h-full ">
-        <ContentTableAdd title={props.title} />
+        {props.children}
         <DataTable columns={props.columns} data={props.data} />
       </section>
-      {props.children}
     </>
   );
 };

@@ -1,22 +1,19 @@
 import { Plus } from "lucide-react";
+import { Link } from "@remix-run/react";
 import { Button } from "../../ui/button";
-import { useAddDialog } from "~/core/lib/context/dialog_context/add_dialog_context";
 
 type ContentTableAddProps = {
   title: string;
+  route: string;
 };
 
 export const ContentTableAdd: React.FC<ContentTableAddProps> = (props) => {
-  const { setOpen } = useAddDialog();
-
   return (
-    <Button
-      onClick={() => setOpen(true)}
-      type="button"
-      className="w-full h-10 lg:w-fit lg:h-fit"
-    >
-      <Plus />
-      Tambah {props.title}
-    </Button>
+    <Link to={`${props.route}/add`} className="flex w-fit h-fit">
+      <Button type="button" className="content-table-add">
+        <Plus />
+        Tambah {props.title}
+      </Button>
+    </Link>
   );
 };

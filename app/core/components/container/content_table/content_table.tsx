@@ -2,24 +2,18 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ContentTableBody } from "./content_table_body";
 import { ContentTableHeader } from "./content_table_header";
 import { ErrorAlert } from "../../dialog/error_alert";
-import { showToast } from "~/core/lib/hooks/show_toast";
 
 type ItemType<T> = T extends (infer U)[] ? U : T;
 
-type ContentTableProps<T, R> = {
+type ContentTableProps<T> = {
   title: string;
   loaderData: SuccessResponseType<T> | FailedResponseType<string>;
-  actionRes?: R;
   columns: ColumnDef<ItemType<T>>[];
   children: React.ReactNode;
 };
 
-export const ContentTable = <T, R extends RawResponseType>(
-  props: ContentTableProps<T, R>
-) => {
+export const ContentTable = <T,>(props: ContentTableProps<T>) => {
   const loaderData = props.loaderData;
-
-  props.actionRes != undefined && showToast(props.actionRes);
 
   return (
     <section className="flex flex-col gap-3 lg:gap-4 w-full flex-1 rounded-md border">
@@ -28,7 +22,7 @@ export const ContentTable = <T, R extends RawResponseType>(
         <ContentTableBody
           title={props.title}
           columns={props.columns}
-          data={(loaderData.data as ResponseData<any>).data}
+          data={(loaderData.data as ResponseData<T>).data}
         >
           {props.children}
         </ContentTableBody>

@@ -6,18 +6,16 @@ import {
   DropdownMenuTrigger,
 } from "~/core/components/ui/dropdown-menu";
 import { Button } from "../../ui/button";
-import { MoreHorizontal, Pencil, Trash } from "lucide-react";
-import { useEditDialog } from "~/core/lib/context/dialog_context/edit_dialog_context";
+import { MoreHorizontal, Trash } from "lucide-react";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
 
-type TableActionProps<T> = {
-  data: T;
-  setSelectedItem: (item: T | null) => void;
+type TableActionProps = {
+  setSelectedItem: () => void;
+  children: React.ReactNode;
 };
 
-export const TableAction = <T,>(props: TableActionProps<T>) => {
-  const { setOpen: setOpenEdit } = useEditDialog();
-  const { setOpen: setOpenDelete } = useDeleteDialog();
+export const TableAction = (props: TableActionProps) => {
+  const { setOpen } = useDeleteDialog();
 
   return (
     <DropdownMenu>
@@ -29,20 +27,12 @@ export const TableAction = <T,>(props: TableActionProps<T>) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
+        {props.children}
 
         <DropdownMenuItem
           onClick={() => {
-            props.setSelectedItem(props.data);
-            setOpenEdit(true);
-          }}
-        >
-          <Pencil />
-          Ubah
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => {
-            props.setSelectedItem(props.data);
-            setOpenDelete(true);
+            props.setSelectedItem();
+            setOpen(true);
           }}
           className="text-danger"
         >
