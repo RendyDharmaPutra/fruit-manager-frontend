@@ -6,7 +6,7 @@ import {
 import { NavigationItem } from "./navigation_item";
 import { NavigationListItem } from "./navigation_list_item";
 
-const menuListItem = [
+const managementRoutes = [
   {
     name: "Buah",
     route: "/fruit",
@@ -21,6 +21,17 @@ const menuListItem = [
   },
 ];
 
+const transactionRoutes = [
+  {
+    name: "Pemasukan",
+    route: "/income",
+  },
+  {
+    name: "Pengeluaran",
+    route: "/outcome",
+  },
+];
+
 export const NavigationContent = (props: NavigationContentProps) => {
   return (
     <>
@@ -32,7 +43,24 @@ export const NavigationContent = (props: NavigationContentProps) => {
         </NavigationMenuTrigger>
         <NavigationMenuContent className="absolute top-10 right-0 p-2 bg-white shadow-md rounded-md">
           <ul className="grid gap-2 w-40">
-            {menuListItem.map((item) => (
+            {managementRoutes.map((item) => (
+              <NavigationListItem
+                key={item.name}
+                route={item.route}
+                name={item.name}
+              />
+            ))}
+          </ul>
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+
+      <NavigationMenuItem className="relative navigation-item">
+        <NavigationMenuTrigger className="flex items-center w-full">
+          Transaksi
+        </NavigationMenuTrigger>
+        <NavigationMenuContent className="absolute top-10 right-0 p-2 bg-white shadow-md rounded-md">
+          <ul className="grid gap-2 w-40">
+            {transactionRoutes.map((item) => (
               <NavigationListItem
                 key={item.name}
                 route={item.route}
