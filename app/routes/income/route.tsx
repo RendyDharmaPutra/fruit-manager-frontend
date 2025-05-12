@@ -34,11 +34,10 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const code = formData.get("code");
 
-  console.log(code);
-
-  return {
-    success: false,
-    message: "Terjadi Kesalahan saat aksi",
-    error: "Terjadi Kesalahan tidak diketahui",
-  } as FailedResponseType<string>;
+  return await fetchApi(
+    request,
+    `/income/${code}`,
+    "DELETE",
+    "menghapus data Pemasukan"
+  );
 }
