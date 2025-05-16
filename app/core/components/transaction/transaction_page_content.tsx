@@ -1,10 +1,10 @@
 import { useSelectedTransaction } from "~/core/lib/context/selected_transaction_context";
-import { ContentTable } from "../container/content_table/content_table";
 import { ContentTableAdd } from "../container/content_table/content_table_add";
 import { DeleteDialog } from "../dialog/delete_dialog";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
 import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
 import { ColumnDef } from "@tanstack/react-table";
+import { ContentTableBody } from "../container/content_table/content_table_body";
 
 type TransactionPageContentProps<T, R> = {
   title: "Pemasukan" | "Pengeluaran";
@@ -23,10 +23,10 @@ export const TransactionPageContent = <T, R extends RawResponseType>(
   props.actionRes != undefined && showStandardToast(props.actionRes);
 
   return (
-    <ContentTable
+    <ContentTableBody
       title={props.title}
       columns={props.transactionColumns}
-      loaderData={props.loaderData}
+      data={(props.loaderData as SuccessResponseType<T[]>).data.data}
     >
       <ContentTableAdd title={props.title} route="/income" />
       <DeleteDialog
@@ -36,6 +36,6 @@ export const TransactionPageContent = <T, R extends RawResponseType>(
         setOpen={setOpen}
         title={props.title}
       />
-    </ContentTable>
+    </ContentTableBody>
   );
 };

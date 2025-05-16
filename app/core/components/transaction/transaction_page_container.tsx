@@ -1,12 +1,12 @@
-import { PageContainer } from "../container/page_container";
+import { PageContainer } from "../layout/page_layout/page_container";
 import { ColumnDef } from "@tanstack/react-table";
 import { TransactionPageContent } from "./transaction_page_content";
 import { SelectedTransactionProvider } from "~/core/lib/context/selected_transaction_context";
 
 type TransactionPageContainerProps<T, R> = {
   title: "Pemasukan" | "Pengeluaran";
-  actionRes?: R;
   loaderData: SuccessResponseType<T[]> | FailedResponseType<string>;
+  actionRes?: R;
   transactionColumns: ColumnDef<T>[];
 };
 
@@ -15,7 +15,10 @@ export const TransactionPageContainer = <T, R extends RawResponseType>(
 ) => {
   return (
     <SelectedTransactionProvider>
-      <PageContainer>
+      <PageContainer
+        title={`Daftar ${props.title}`}
+        loaderData={props.loaderData}
+      >
         <TransactionPageContent
           title={props.title}
           loaderData={props.loaderData}

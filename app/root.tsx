@@ -10,7 +10,7 @@ import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 import { Toaster } from "./core/components/ui/toaster";
-import { NavigationBar } from "./core/components/navigation/navigation_bar";
+import { NavigationBar } from "./core/components/layout/navigation/navigation_bar";
 
 export const meta: MetaFunction = () => {
   return [

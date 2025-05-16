@@ -1,17 +1,19 @@
-import { PageContainer } from "~/core/components/container/page_container";
+import { PageContainer } from "~/core/components/layout/page_layout/page_container";
 import { SelectedStuffProvider } from "../lib/context/selected_stuff_context";
 import { useErrorStuff } from "../lib/context/error_stuff_context";
 import { updateValidationError } from "~/core/lib/hooks/update_validation_error";
 import { AddDialogProvider } from "~/core/lib/context/dialog_context/add_dialog_context";
 import { EditDialogProvider } from "~/core/lib/context/dialog_context/edit_dialog_context";
 
-type StuffPageContainerProps<T> = {
-  actionRes?: T;
+type StuffPageContainerProps<R> = {
+  title: "Buah" | "Pupuk" | "Bensin";
+  loaderData: SuccessResponseType<StuffType[]> | FailedResponseType<string>;
+  actionRes?: R;
   children: React.ReactNode;
 };
 
-export const StuffPageContainer = <T extends RawResponseType>(
-  props: StuffPageContainerProps<T>
+export const StuffPageContainer = <R extends RawResponseType>(
+  props: StuffPageContainerProps<R>
 ) => {
   const { setValidationError } = useErrorStuff();
 
@@ -21,7 +23,12 @@ export const StuffPageContainer = <T extends RawResponseType>(
     <SelectedStuffProvider>
       <AddDialogProvider>
         <EditDialogProvider>
-          <PageContainer>{props.children}</PageContainer>
+          <PageContainer
+            title={`Daftar ${props.title}`}
+            loaderData={props.loaderData}
+          >
+            {props.children}
+          </PageContainer>
         </EditDialogProvider>
       </AddDialogProvider>
     </SelectedStuffProvider>

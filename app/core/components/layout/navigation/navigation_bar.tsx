@@ -4,7 +4,7 @@ import { NavigationHeader } from "./navigation_header";
 import { NavigationSmall } from "./navigation_small";
 import { NavMenuBtn } from "./nav_menu_btn";
 import { useState } from "react";
-import { LogoutDialog } from "../dialog/logout_dialog";
+import { LogoutDialog } from "../../dialog/logout_dialog";
 
 type NavigationBarProps = {};
 

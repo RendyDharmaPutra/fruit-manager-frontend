@@ -5,8 +5,8 @@ import { StuffPageContent } from "./stuff_page_content";
 
 type StuffPageProps<T> = {
   title: "Buah" | "Bensin" | "Pupuk";
-  actionRes?: T;
   loaderData: SuccessResponseType<StuffType[]> | FailedResponseType<string>;
+  actionRes?: T;
   stuffColumns: ColumnDef<StuffType>[];
 };
 
@@ -15,7 +15,11 @@ export const StuffPage = <T extends RawResponseType>(
 ) => {
   return (
     <ErrorStuffProvider>
-      <StuffPageContainer actionRes={props.actionRes}>
+      <StuffPageContainer
+        title={props.title}
+        loaderData={props.loaderData}
+        actionRes={props.actionRes}
+      >
         <StuffPageContent
           title={props.title}
           loaderData={props.loaderData}
