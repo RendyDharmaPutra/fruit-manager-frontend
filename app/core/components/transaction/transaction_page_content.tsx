@@ -9,7 +9,7 @@ import { ContentTableBody } from "../container/content_table/content_table_body"
 type TransactionPageContentProps<T, R> = {
   title: "Pemasukan" | "Pengeluaran";
   actionRes?: R;
-  loaderData: SuccessResponseType<T[]> | FailedResponseType<string>;
+  loaderData: SuccessResponseType<T[]>;
   transactionColumns: ColumnDef<T>[];
 };
 
@@ -26,7 +26,7 @@ export const TransactionPageContent = <T, R extends RawResponseType>(
     <ContentTableBody
       title={props.title}
       columns={props.transactionColumns}
-      data={(props.loaderData as SuccessResponseType<T[]>).data.data}
+      data={props.loaderData.data.data}
     >
       <ContentTableAdd title={props.title} route="/income" />
       <DeleteDialog

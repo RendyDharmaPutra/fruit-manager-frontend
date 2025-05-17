@@ -20,12 +20,14 @@ export const StuffPage = <T extends RawResponseType>(
         loaderData={props.loaderData}
         actionRes={props.actionRes}
       >
-        <StuffPageContent
-          title={props.title}
-          loaderData={props.loaderData}
-          actionRes={props.actionRes}
-          stuffColumns={props.stuffColumns}
-        />
+        {(successData) => (
+          <StuffPageContent
+            title={props.title}
+            loaderData={successData}
+            actionRes={props.actionRes}
+            stuffColumns={props.stuffColumns}
+          />
+        )}
       </StuffPageContainer>
     </ErrorStuffProvider>
   );

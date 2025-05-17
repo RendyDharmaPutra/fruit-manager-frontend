@@ -22,11 +22,9 @@ export default function IncomeDetail() {
 
   return (
     <PageContainer loaderData={loaderData} title="Rincian Pemasukan">
-      <IncomeDetailPageContent
-        IncomeDetail={
-          (loaderData as SuccessResponseType<IncomeDetailType>).data
-        }
-      />
+      {(successData) => (
+        <IncomeDetailPageContent IncomeDetail={successData.data} />
+      )}
     </PageContainer>
   );
 }

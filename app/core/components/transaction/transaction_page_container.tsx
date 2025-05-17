@@ -19,12 +19,14 @@ export const TransactionPageContainer = <T, R extends RawResponseType>(
         title={`Daftar ${props.title}`}
         loaderData={props.loaderData}
       >
-        <TransactionPageContent
-          title={props.title}
-          loaderData={props.loaderData}
-          actionRes={props.actionRes}
-          transactionColumns={props.transactionColumns}
-        />
+        {(successData) => (
+          <TransactionPageContent
+            title={props.title}
+            loaderData={successData}
+            actionRes={props.actionRes}
+            transactionColumns={props.transactionColumns}
+          />
+        )}
       </PageContainer>
     </SelectedTransactionProvider>
   );

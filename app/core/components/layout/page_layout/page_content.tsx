@@ -5,7 +5,7 @@ import { isSuccessResponse } from "~/core/lib/response_type_narrowing";
 type PageContentProps<T> = {
   title: string;
   loaderData: SuccessResponseType<T> | FailedResponseType<string>;
-  children: React.ReactNode;
+  children: (data: SuccessResponseType<T>) => React.ReactNode;
 };
 
 export const PageContent = <T,>(props: PageContentProps<T>) => {
@@ -15,7 +15,7 @@ export const PageContent = <T,>(props: PageContentProps<T>) => {
     <section className="flex flex-col gap-3 lg:gap-4 w-full flex-1 rounded-md border">
       <PageContentHeader title={props.title} />
       {isSuccessResponse(loaderData) ? (
-        props.children
+        props.children(loaderData)
       ) : (
         <div className="px-8 py-4">
           <ErrorAlert

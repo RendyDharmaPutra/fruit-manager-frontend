@@ -7,7 +7,7 @@ import { ContentTableBody } from "~/core/components/container/content_table/cont
 type StuffPageContentProps<T> = {
   title: "Buah" | "Bensin" | "Pupuk";
   actionRes?: T;
-  loaderData: SuccessResponseType<StuffType[]> | FailedResponseType<string>;
+  loaderData: SuccessResponseType<StuffType[]>;
   stuffColumns: ColumnDef<StuffType>[];
 };
 
@@ -20,7 +20,7 @@ export const StuffPageContent = <T extends RawResponseType>(
     <ContentTableBody
       title={props.title}
       columns={props.stuffColumns}
-      data={(props.loaderData as SuccessResponseType<StuffType[]>).data.data}
+      data={props.loaderData.data.data}
     >
       <StuffContentTableAdd title={props.title} />
       <StuffDialogWrapper title={props.title} />

@@ -9,7 +9,7 @@ type StuffPageContainerProps<R> = {
   title: "Buah" | "Pupuk" | "Bensin";
   loaderData: SuccessResponseType<StuffType[]> | FailedResponseType<string>;
   actionRes?: R;
-  children: React.ReactNode;
+  children: (data: SuccessResponseType<StuffType[]>) => React.ReactNode;
 };
 
 export const StuffPageContainer = <R extends RawResponseType>(
@@ -27,7 +27,7 @@ export const StuffPageContainer = <R extends RawResponseType>(
             title={`Daftar ${props.title}`}
             loaderData={props.loaderData}
           >
-            {props.children}
+            {(successData) => props.children(successData)}
           </PageContainer>
         </EditDialogProvider>
       </AddDialogProvider>

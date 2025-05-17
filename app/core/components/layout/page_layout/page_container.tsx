@@ -4,7 +4,7 @@ import { PageContent } from "./page_content";
 type PageContainerProps<T> = {
   title: string;
   loaderData: SuccessResponseType<T> | FailedResponseType<string>;
-  children: React.ReactNode;
+  children: (data: SuccessResponseType<T>) => React.ReactNode;
 };
 
 export const PageContainer = <T,>(props: PageContainerProps<T>) => {
@@ -12,7 +12,7 @@ export const PageContainer = <T,>(props: PageContainerProps<T>) => {
     <DeleteDialogProvider>
       <div className="p-4 flex flex-col w-full h-screen ">
         <PageContent title={props.title} loaderData={props.loaderData}>
-          {props.children}
+          {(successData) => props.children(successData)}
         </PageContent>
       </div>
     </DeleteDialogProvider>
