@@ -5,7 +5,7 @@ import { fetchApi } from "~/core/utils/fetch_api";
 import { incomeColumns } from "~/features/income/lib/columns";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const res = await fetchApi<IncomeType, "GET">(
+  const res = await fetchApi<IncomeType[], "GET">(
     request,
     "/income/",
     "GET",

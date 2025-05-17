@@ -11,7 +11,7 @@ type ContentTableBodyProps<T> = {
 export const ContentTableBody = <T,>(props: ContentTableBodyProps<T>) => {
   return (
     <>
-      <section className="px-8 py-4 flex flex-col gap-4 w-full h-full ">
+      <section className="p-content flex flex-col gap-4 w-full h-full ">
         {props.children}
         <DataTable columns={props.columns} data={props.data} />
       </section>

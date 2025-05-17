@@ -2,7 +2,7 @@ type FetchResponseType<
   T,
   Method extends RequestInit["method"]
 > = Method extends "GET"
-  ? SuccessResponseType<T[]> | FailedResponseType<string>
+  ? SuccessResponseType<T> | FailedResponseType<string>
   : Method extends "POST" | "PUT"
   ?
       | SuccessResponseType<null>

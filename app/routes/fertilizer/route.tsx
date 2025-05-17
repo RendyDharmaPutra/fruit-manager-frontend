@@ -6,7 +6,7 @@ import { stuffColumns } from "~/features/stuff/lib/column";
 import { StuffPage } from "~/features/stuff/components/stuff_page";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  const res = await fetchApi<StuffType, "GET">(
+  const res = await fetchApi<StuffType[], "GET">(
     request,
     "/fertilizer/",
     "GET",
