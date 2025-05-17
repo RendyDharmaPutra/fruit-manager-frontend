@@ -1,10 +1,10 @@
-import { useSelectedTransaction } from "~/core/lib/context/selected_transaction_context";
-import { ContentTableAdd } from "../container/content_table/content_table_add";
-import { DeleteDialog } from "../dialog/delete_dialog";
+import { useSelectedTransaction } from "~/features/transaction/lib/context/selected_transaction_context";
+import { ContentTableAdd } from "../../../core/components/container/content_table/content_table_add";
+import { DeleteDialog } from "../../../core/components/dialog/delete_dialog";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
 import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
 import { ColumnDef } from "@tanstack/react-table";
-import { ContentTableBody } from "../container/content_table/content_table_body";
+import { ContentTableBody } from "../../../core/components/container/content_table/content_table_body";
 
 type TransactionPageContentProps<T, R> = {
   title: "Pemasukan" | "Pengeluaran";

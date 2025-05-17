@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { TableActionTransaction } from "~/core/components/transaction/table_action_transaction";
+import { TableActionTransaction } from "~/features/transaction/components/table_action_transaction";
 
 import { Button } from "~/core/components/ui/button";
 

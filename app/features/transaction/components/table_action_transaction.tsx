@@ -2,7 +2,7 @@ import { TableAction } from "~/core/components/container/content_table/table_act
 import { ChevronRight } from "lucide-react";
 import { DropdownMenuItem } from "~/core/components/ui/dropdown-menu";
 import { Link } from "@remix-run/react";
-import { useSelectedTransaction } from "~/core/lib/context/selected_transaction_context";
+import { useSelectedTransaction } from "~/features/transaction/lib/context/selected_transaction_context";
 
 type TableActionTransactionProps = {
   data: string;

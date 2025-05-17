@@ -1,7 +1,7 @@
-import { PageContainer } from "../layout/page_layout/page_container";
+import { PageContainer } from "../../../core/components/layout/page_layout/page_container";
 import { ColumnDef } from "@tanstack/react-table";
 import { TransactionPageContent } from "./transaction_page_content";
-import { SelectedTransactionProvider } from "~/core/lib/context/selected_transaction_context";
+import { SelectedTransactionProvider } from "~/features/transaction/lib/context/selected_transaction_context";
 
 type TransactionPageContainerProps<T, R> = {
   title: "Pemasukan" | "Pengeluaran";

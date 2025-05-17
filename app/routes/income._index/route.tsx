@@ -1,8 +1,8 @@
 import { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
-import { TransactionPageContainer } from "~/core/components/transaction/transaction_page_container";
+import { TransactionPageContainer } from "~/features/transaction/components/transaction_page_container";
 import { fetchApi } from "~/core/utils/fetch_api";
-import { incomeColumns } from "~/features/income/lib/columns";
+import { incomeColumns } from "~/features/transaction/lib/columns/income_columns";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const res = await fetchApi<IncomeType[], "GET">(
