@@ -4,7 +4,7 @@ import { DataTable } from "../../ui/data-table";
 type ContentTableBodyProps<T> = {
   data: T[];
   columns: ColumnDef<T>[];
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export const ContentTableBody = <T,>(props: ContentTableBodyProps<T>) => {

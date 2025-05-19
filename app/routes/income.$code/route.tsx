@@ -18,8 +18,6 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 export default function IncomeDetail() {
   const loaderData = useLoaderData<typeof loader>();
 
-  console.log(loaderData);
-
   return (
     <PageContainer loaderData={loaderData} title="Detail Pemasukan">
       {(successData) => (
