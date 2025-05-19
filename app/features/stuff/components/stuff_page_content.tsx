@@ -18,7 +18,6 @@ export const StuffPageContent = <T extends RawResponseType>(
 
   return (
     <ContentTableBody
-      title={props.title}
       columns={props.stuffColumns}
       data={props.loaderData.data.data}
     >

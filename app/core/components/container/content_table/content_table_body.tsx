@@ -2,8 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "../../ui/data-table";
 
 type ContentTableBodyProps<T> = {
-  title: string;
-  data: any;
+  data: T[];
   columns: ColumnDef<T>[];
   children: React.ReactNode;
 };

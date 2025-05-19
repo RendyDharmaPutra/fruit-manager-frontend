@@ -24,7 +24,6 @@ export const TransactionPageContent = <T, R extends RawResponseType>(
 
   return (
     <ContentTableBody
-      title={props.title}
       columns={props.transactionColumns}
       data={props.loaderData.data.data}
     >
