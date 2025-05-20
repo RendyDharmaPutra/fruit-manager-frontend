@@ -27,7 +27,10 @@ export const TransactionPageContent = <T, R extends RawResponseType>(
       columns={props.transactionColumns}
       data={props.loaderData.data.data}
     >
-      <ContentTableAdd title={props.title} route="/income" />
+      <ContentTableAdd
+        title={props.title}
+        route={`/${props.title === "Pemasukan" ? "income" : "outcome"}`}
+      />
       <DeleteDialog
         id={selectedItem!}
         name="code"
