@@ -1,22 +1,25 @@
 import { ContentTableBody } from "~/core/components/container/content_table/content_table_body";
-import { incomeDetailColumns } from "../../lib/columns/income_detail_columns";
 import { IncomeInfoSection } from "./income_info/income_info_section";
+import { ColumnDef } from "@tanstack/react-table";
 
-type IncomeDetailPageContentProps = {
-  IncomeDetail: IncomeDetailType;
+type IncomeDetailPageContentProps<R, U> = {
+  columns: ColumnDef<R>[];
+  data: U;
+  children?: React.ReactNode;
 };
 
-export const IncomeDetailPageContent = (
-  props: IncomeDetailPageContentProps
+export const IncomeDetailPageContent = <
+  T extends TransactionType,
+  R extends DetailOfTransactionType,
+  U extends TransactionDetailType<T, R>
+>(
+  props: IncomeDetailPageContentProps<R, U>
 ) => {
   return (
-    <section>
-      <IncomeInfoSection IncomeDetail={props.IncomeDetail} />
+    <>
+      <IncomeInfoSection data={props.data}>{props.children}</IncomeInfoSection>
 
-      <ContentTableBody
-        columns={incomeDetailColumns}
-        data={props.IncomeDetail.details}
-      />
-    </section>
+      <ContentTableBody columns={props.columns} data={props.data.details} />
+    </>
   );
 };

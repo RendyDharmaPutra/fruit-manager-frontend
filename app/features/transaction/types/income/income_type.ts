@@ -1,6 +1,3 @@
-type IncomeType = {
-  code: string;
+type IncomeType = TransactionType & {
   distribution: boolean;
-  totalPrice: number;
-  transactionTime: string;
 };

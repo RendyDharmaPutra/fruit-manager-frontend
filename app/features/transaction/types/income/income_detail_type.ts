@@ -1,9 +1,8 @@
-type IncomeDetailType = IncomeType & {
-  details: DetailOfIncomeType[];
-};
+type IncomeDetailType = TransactionDetailType<
+  IncomeType,
+  DetailOfIncomeType
+> & {};
 
-type DetailOfIncomeType = {
+type DetailOfIncomeType = DetailOfTransactionType & {
   weight: number;
-  price: number;
-  fruit: StuffType;
 };
