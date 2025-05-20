@@ -2,7 +2,7 @@ import type { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { PageContainer } from "~/core/components/layout/page_layout/page_container";
 import { fetchApi } from "~/core/utils/fetch_api";
-import { IncomeDetailPageContent } from "~/features/transaction/components/income/income_detail_page_content";
+import { TransactionDetailPageContent } from "~/features/transaction/components/transaction_detail_page_content";
 import { outcomeDetailColumns } from "~/features/transaction/lib/columns/outcome_detail_columns";
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
@@ -22,7 +22,7 @@ export default function OutcomeDetail() {
   return (
     <PageContainer loaderData={loaderData} title="Detail Pengeluaran">
       {(successData) => (
-        <IncomeDetailPageContent
+        <TransactionDetailPageContent
           columns={outcomeDetailColumns}
           data={successData.data}
         />

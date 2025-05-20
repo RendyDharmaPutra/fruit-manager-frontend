@@ -1,11 +1,11 @@
-type IncomeInfoProps = {
+type TransactionInfoProps = {
   value: string;
   small: boolean;
   className?: string;
   children?: React.ReactNode;
 };
 
-export const IncomeInfo = (props: IncomeInfoProps) => {
+export const TransactionInfo = (props: TransactionInfoProps) => {
   const textSize = props.small
     ? "text-sm md:text-base"
     : "text-base md:text-lg";
