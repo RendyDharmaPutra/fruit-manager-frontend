@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
 import { Button } from "~/core/components/ui/button";
+import { currencyFormat } from "~/core/utils/formatter/currenty_format";
 
 export const incomeDetailColumns: ColumnDef<DetailOfIncomeType>[] = [
   {
@@ -13,12 +14,10 @@ export const incomeDetailColumns: ColumnDef<DetailOfIncomeType>[] = [
     header: () => <div className="text-left ">Harga</div>,
     cell: ({ row }) => {
       const amount = row.original.fruit.price;
-      const formatted = new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-      }).format(amount);
 
-      return <div className="text-left font-medium">{formatted}</div>;
+      return (
+        <div className="text-left font-medium">{currencyFormat(amount)}</div>
+      );
     },
   },
   {
@@ -45,12 +44,10 @@ export const incomeDetailColumns: ColumnDef<DetailOfIncomeType>[] = [
     },
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("price"));
-      const formatted = new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-      }).format(amount);
 
-      return <div className="text-center font-medium">{formatted}</div>;
+      return (
+        <div className="text-center font-medium">{currencyFormat(amount)}</div>
+      );
     },
   },
 ];
