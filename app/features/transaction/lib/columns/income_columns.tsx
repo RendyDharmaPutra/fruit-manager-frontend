@@ -1,8 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Currency } from "lucide-react";
 import { TableActionTransaction } from "~/features/transaction/components/table_action_transaction";
 
 import { Button } from "~/core/components/ui/button";
+import { dateFormat } from "~/core/utils/formatter/date_format";
+import { currencyFormat } from "~/core/utils/formatter/currenty_format";
 
 export const incomeColumns: ColumnDef<IncomeType>[] = [
   {
@@ -17,6 +19,10 @@ export const incomeColumns: ColumnDef<IncomeType>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    cell: ({ row }) => {
+      const date: string = row.getValue("transactionTime");
+      return <div className="text-left font-medium">{dateFormat(date)}</div>;
     },
   },
   {
@@ -39,12 +45,10 @@ export const incomeColumns: ColumnDef<IncomeType>[] = [
     header: () => <div className="text-right ">Harga Total</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("totalPrice"));
-      const formatted = new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-      }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return (
+        <div className="text-right font-medium">{currencyFormat(amount)}</div>
+      );
     },
   },
   {

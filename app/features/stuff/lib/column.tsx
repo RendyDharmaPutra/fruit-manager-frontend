@@ -3,6 +3,7 @@ import { ArrowUpDown } from "lucide-react";
 
 import { Button } from "~/core/components/ui/button";
 import { TableActionStuff } from "../components/table_action_stuff";
+import { currencyFormat } from "~/core/utils/formatter/currenty_format";
 
 export const stuffColumns: ColumnDef<StuffType>[] = [
   {
@@ -24,12 +25,10 @@ export const stuffColumns: ColumnDef<StuffType>[] = [
     header: () => <div className="text-right">Harga</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("price"));
-      const formatted = new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-      }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return (
+        <div className="text-right font-medium">{currencyFormat(amount)}</div>
+      );
     },
   },
   {
