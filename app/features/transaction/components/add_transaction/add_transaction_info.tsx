@@ -1,3 +1,4 @@
+import { DateField } from "~/core/components/form/date_field";
 import { SubmitBtn } from "~/core/components/form/submit_btn";
 import { currencyFormat } from "~/core/utils/formatter/currenty_format";
 
@@ -14,6 +15,8 @@ export const AddTransactionInfo = (props: AddTransactionInfoProps) => {
           Informasi {props.title}
         </h6>
       </section>
+
+      <DateField name="transactionTime" placeholder="Waktu Transaksi" />
 
       {props.children}
 
