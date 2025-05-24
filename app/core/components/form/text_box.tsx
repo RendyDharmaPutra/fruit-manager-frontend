@@ -4,7 +4,7 @@ import { Label } from "../ui/label";
 type TextBoxProps = {
   id: string;
   label: string;
-  placeholder: string;
+  placeholder?: string;
   type: React.HTMLInputTypeAttribute;
   defaultValue?: string | number;
   error?: string[];

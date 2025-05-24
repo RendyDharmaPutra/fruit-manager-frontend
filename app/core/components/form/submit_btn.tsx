@@ -4,10 +4,12 @@ import { Loader2 } from "lucide-react";
 
 type SubmitBtnProps = {
   title: string;
+  type?: "submit" | "button";
   fit?: boolean;
 };
 
 export const SubmitBtn: React.FC<SubmitBtnProps> = ({
+  type = "submit",
   fit = false,
   ...props
 }: SubmitBtnProps) => {
@@ -17,7 +19,7 @@ export const SubmitBtn: React.FC<SubmitBtnProps> = ({
   return (
     <Button
       disabled={pending}
-      type="submit"
+      type={type}
       className={`${fit ? "w-fit" : "w-full"} bg-primary ${
         pending && "bg-secondary"
       }`}

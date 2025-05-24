@@ -1,0 +1,43 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "~/core/components/ui/dialog";
+import { SubmitBtn } from "~/core/components/form/submit_btn";
+import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
+import { SelectField } from "~/core/components/form/select_field";
+
+type TransactionFormDialogProps = {
+  title: "Pengeluaran" | "Pemasukan";
+  fruit: StuffType[];
+  children: React.ReactNode;
+};
+
+export const TransactionFormDialog = (props: TransactionFormDialogProps) => {
+  const { open, setOpen } = useDeleteDialog();
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Tambah Detail {props.title}</DialogTitle>
+          <DialogDescription>
+            Masukkan data {props.title}. Tekan Tambah jika selesai.
+          </DialogDescription>
+        </DialogHeader>
+        <section>
+          <div className="grid gap-4 py-4">
+            <SelectField title="Buah" data={props.fruit} />
+            {props.children}
+          </div>
+          <DialogFooter>
+            <SubmitBtn title="Tambah" type="button" />
+          </DialogFooter>
+        </section>
+      </DialogContent>
+    </Dialog>
+  );
+};
