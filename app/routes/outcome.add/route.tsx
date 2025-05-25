@@ -3,6 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import { fetchApi } from "~/core/utils/fetch_api";
 import { AddTransactionPageContainer } from "~/features/transaction/components/add_transaction/add_transaction_page_container";
 import { AddOutcomePageContent } from "~/features/transaction/components/outcome/add_outcome_page_content";
+import { OutcomeDetailProvider } from "~/features/transaction/lib/context/detail_transaction_context";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const fruitRes = await fetchApi<StuffType[], "GET">(
@@ -52,8 +53,10 @@ export default function AddOutcome() {
   const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <AddTransactionPageContainer title="Pengeluaran" loaderData={loaderData}>
-      {(successData) => <AddOutcomePageContent data={successData.data} />}
-    </AddTransactionPageContainer>
+    <OutcomeDetailProvider>
+      <AddTransactionPageContainer title="Pengeluaran" loaderData={loaderData}>
+        {(successData) => <AddOutcomePageContent data={successData.data} />}
+      </AddTransactionPageContainer>
+    </OutcomeDetailProvider>
   );
 }

@@ -6,6 +6,7 @@ type SubmitBtnProps = {
   title: string;
   type?: "submit" | "button";
   fit?: boolean;
+  onClick?: () => void;
 };
 
 export const SubmitBtn: React.FC<SubmitBtnProps> = ({
@@ -23,6 +24,7 @@ export const SubmitBtn: React.FC<SubmitBtnProps> = ({
       className={`${fit ? "w-fit" : "w-full"} bg-primary ${
         pending && "bg-secondary"
       }`}
+      onClick={props.onClick}
     >
       {pending && <Loader2 className="animate-spin" />}
       {props.title}

@@ -8,6 +8,7 @@ type TextBoxProps = {
   type: React.HTMLInputTypeAttribute;
   defaultValue?: string | number;
   error?: string[];
+  onChange?: React.Dispatch<React.SetStateAction<number>>;
   children?: React.ReactNode;
 };
 
@@ -21,6 +22,7 @@ export const TextBox: React.FC<TextBoxProps> = (props) => {
         name={props.id}
         placeholder={`Masukkan ${props.label}`}
         defaultValue={props.defaultValue}
+        onChange={(e) => props.onChange?.(Number(e.target.value))}
       />
       {props.error && <p className="text-xs text-danger">{props.error[0]}</p>}
       {props.children}
