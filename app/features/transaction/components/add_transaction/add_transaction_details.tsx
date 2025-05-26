@@ -2,14 +2,19 @@ import { Plus } from "lucide-react";
 import { Button } from "~/core/components/ui/button";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
 
-type AddTransactionDetailsProps = {
+type AddTransactionDetailsProps<T> = {
   title: "Pengeluaran" | "Pemasukan";
   subtitle: "Pupuk" | "Buah";
+  data: T;
   children: React.ReactNode;
 };
 
-export const AddTransactionDetails = (props: AddTransactionDetailsProps) => {
+export const AddTransactionDetails = <T extends any[]>(
+  props: AddTransactionDetailsProps<T>
+) => {
   const { setOpen } = useDeleteDialog();
+
+  console.log("first");
 
   return (
     <section className="p-4 flex flex-col gap-4 md:gap-8 w-full rounded-lg border">
@@ -24,7 +29,16 @@ export const AddTransactionDetails = (props: AddTransactionDetailsProps) => {
         </Button>
       </section>
 
-      {props.children}
+      {props.data.length > 0 ? (
+        props.children
+      ) : (
+        <div className="mb-6 text-center w-full ">
+          <p className="text-sm md:text-base text-gray-700">
+            Belum ada barang yang dipilih. Tekan "Tambah {props.title}" untuk
+            menambah barang pada pengeluaran ini
+          </p>
+        </div>
+      )}
     </section>
   );
 };
