@@ -9,6 +9,7 @@ import { useState } from "react";
 type DateFieldProps = {
   name: string;
   placeholder: string;
+  error?: string;
 };
 
 export const DateField = (props: DateFieldProps) => {
@@ -38,6 +39,9 @@ export const DateField = (props: DateFieldProps) => {
           />
         </PopoverContent>
       </Popover>
+      {props.error && (
+        <p className="-mt-1.5 md:-mt-6 text-xs text-danger">{props.error}</p>
+      )}
 
       <input
         type="hidden"

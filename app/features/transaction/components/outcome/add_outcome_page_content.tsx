@@ -3,15 +3,20 @@ import { AddOutcomeDetails } from "./add_outcome_details";
 import { OutcomeFormDialog } from "../dialog/outcome_form_dialog";
 import { useOutcomeDetail } from "../../lib/context/detail_transaction_context";
 import { useMemo } from "react";
+import { useTransactionValidation } from "../../lib/context/transaction_validation_context";
+import { updateValidationError } from "~/core/lib/hooks/update_validation_error";
 
-type AddOutcomePageContentProps = {
+type AddOutcomePageContentProps<T> = {
+  actionRes?: T;
   data: {
     fruit: StuffType[];
     fertilizer: StuffType[];
   };
 };
 
-export const AddOutcomePageContent = (props: AddOutcomePageContentProps) => {
+export const AddOutcomePageContent = <T extends RawResponseType>(
+  props: AddOutcomePageContentProps<T>
+) => {
   const { selectedDetail, totalPrice } = useOutcomeDetail();
 
   const outcomeDetail = useMemo(() => {
@@ -24,6 +29,10 @@ export const AddOutcomePageContent = (props: AddOutcomePageContentProps) => {
       };
     });
   }, [selectedDetail]);
+
+  const { setValidationError } = useTransactionValidation();
+
+  updateValidationError(setValidationError, props.actionRes);
 
   return (
     <>

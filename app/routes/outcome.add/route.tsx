@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useActionData, useLoaderData } from "@remix-run/react";
 import { fetchApi } from "~/core/utils/fetch_api";
 import { AddTransactionPageContainer } from "~/features/transaction/components/add_transaction/add_transaction_page_container";
 import { AddOutcomePageContent } from "~/features/transaction/components/outcome/add_outcome_page_content";
@@ -52,11 +52,21 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function AddOutcome() {
   const loaderData = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
 
   return (
     <OutcomeDetailProvider>
-      <AddTransactionPageContainer title="Pengeluaran" loaderData={loaderData}>
-        {(successData) => <AddOutcomePageContent data={successData.data} />}
+      <AddTransactionPageContainer
+        title="Pengeluaran"
+        loaderData={loaderData}
+        actionRes={actionData}
+      >
+        {(successData) => (
+          <AddOutcomePageContent
+            actionRes={actionData}
+            data={successData.data}
+          />
+        )}
       </AddTransactionPageContainer>
     </OutcomeDetailProvider>
   );
@@ -70,15 +80,11 @@ export async function action({ request }: ActionFunctionArgs) {
     details: getTransactionDetail<AddOutcomeDetailType>(body),
   };
 
-  const result = await fetchApi(
+  return await fetchApi(
     request,
     `/outcome`,
     "POST",
     "menambah data Pengeluaran",
     data
   );
-
-  console.log(result);
-
-  return null;
 }
