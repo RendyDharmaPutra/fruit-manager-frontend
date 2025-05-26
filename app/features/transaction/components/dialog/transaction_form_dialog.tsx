@@ -32,6 +32,8 @@ export const TransactionFormDialog = <T,>(
 
     props.handleSubmit(fruit!);
 
+    setSelectedFruit("");
+
     setOpen(false);
   };
 

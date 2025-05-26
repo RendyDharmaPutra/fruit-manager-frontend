@@ -12,7 +12,7 @@ type OutcomeFormDialogProps = {
 };
 
 export const OutcomeFormDialog = (props: OutcomeFormDialogProps) => {
-  const { setCount, setSelectedFertilizer, handleSubmit } =
+  const { count, setCount, setSelectedFertilizer, handleSubmit } =
     useOutcomeFormDialog(props.data.fertilizer);
 
   return (
@@ -31,6 +31,7 @@ export const OutcomeFormDialog = (props: OutcomeFormDialogProps) => {
         id="quantity"
         label={`Kuantitas`}
         type="number"
+        defaultValue={count}
         onChange={setCount}
       />
     </TransactionFormDialog>
@@ -39,16 +40,17 @@ export const OutcomeFormDialog = (props: OutcomeFormDialogProps) => {
 
 const useOutcomeFormDialog = (fertilizerData: StuffType[]) => {
   const [selectedFertilizer, setSelectedFertilizer] = useState("");
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
-  const { selectedDetail, setSelectedDetail } = useOutcomeDetail();
+  const { selectedDetail, setSelectedDetail, setTotalPrice } =
+    useOutcomeDetail();
 
   const handleSubmit = (fruit: StuffType) => {
     const fertilizer = fertilizerData.find(
       (fertilizer) => fertilizer.id == Number(selectedFertilizer)
     );
 
-    if (!fertilizer) return;
+    if (!fertilizer || count < 1) return;
 
     let detail = {
       fertilizer,
@@ -63,11 +65,15 @@ const useOutcomeFormDialog = (fertilizerData: StuffType[]) => {
     );
 
     if (existedDetail) {
+      setTotalPrice((prev) => prev - existedDetail.price);
+
       detail = {
         ...detail,
         count: detail.count + existedDetail.count,
         price: detail.price + existedDetail.price,
       };
+
+      setTotalPrice((prev) => prev + detail.price);
 
       setSelectedDetail((prev) => [
         ...prev.filter(
@@ -81,8 +87,12 @@ const useOutcomeFormDialog = (fertilizerData: StuffType[]) => {
       ]);
     } else {
       setSelectedDetail((prev) => [...prev, detail]);
+      setTotalPrice((prev) => prev + detail.price);
     }
+
+    setSelectedFertilizer("");
+    setCount(1);
   };
 
-  return { setCount, setSelectedFertilizer, handleSubmit };
+  return { count, setCount, setSelectedFertilizer, handleSubmit };
 };

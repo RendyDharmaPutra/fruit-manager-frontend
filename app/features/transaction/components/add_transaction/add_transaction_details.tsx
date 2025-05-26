@@ -2,19 +2,15 @@ import { Plus } from "lucide-react";
 import { Button } from "~/core/components/ui/button";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
 
-type AddTransactionDetailsProps<T> = {
+type AddTransactionDetailsProps = {
   title: "Pengeluaran" | "Pemasukan";
   subtitle: "Pupuk" | "Buah";
-  data: T;
+  dataLength: number;
   children: React.ReactNode;
 };
 
-export const AddTransactionDetails = <T extends any[]>(
-  props: AddTransactionDetailsProps<T>
-) => {
+export const AddTransactionDetails = (props: AddTransactionDetailsProps) => {
   const { setOpen } = useDeleteDialog();
-
-  console.log("first");
 
   return (
     <section className="p-4 flex flex-col gap-4 md:gap-8 w-full rounded-lg border">
@@ -29,7 +25,7 @@ export const AddTransactionDetails = <T extends any[]>(
         </Button>
       </section>
 
-      {props.data.length > 0 ? (
+      {props.dataLength > 0 ? (
         props.children
       ) : (
         <div className="mb-6 text-center w-full ">

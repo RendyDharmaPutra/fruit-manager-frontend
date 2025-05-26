@@ -2,12 +2,16 @@ import { DateField } from "~/core/components/form/date_field";
 import { SubmitBtn } from "~/core/components/form/submit_btn";
 import { currencyFormat } from "~/core/utils/formatter/currenty_format";
 
-type AddTransactionInfoProps = {
+type AddTransactionInfoProps<T> = {
   title: "Pengeluaran" | "Pemasukan";
+  totalPrice: number;
+  data: T;
   children?: React.ReactNode;
 };
 
-export const AddTransactionInfo = (props: AddTransactionInfoProps) => {
+export const AddTransactionInfo = <T extends any[]>(
+  props: AddTransactionInfoProps<T>
+) => {
   return (
     <section className="p-4 flex flex-col gap-4 md:gap-8 w-full rounded-lg border">
       <section className="w-full ">
@@ -17,6 +21,7 @@ export const AddTransactionInfo = (props: AddTransactionInfoProps) => {
       </section>
 
       <DateField name="transactionTime" placeholder="Waktu Transaksi" />
+      <input type="hidden" name="details" value={JSON.stringify(props.data)} />
 
       {props.children}
 
@@ -26,7 +31,7 @@ export const AddTransactionInfo = (props: AddTransactionInfoProps) => {
             Total Harga
           </h6>
           <h6 className="text-base md:text-lg font-semibold text-gray-800">
-            {currencyFormat(10000)}
+            {currencyFormat(props.totalPrice)}
           </h6>
         </div>
       </section>

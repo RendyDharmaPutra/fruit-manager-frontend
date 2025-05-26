@@ -1,9 +1,10 @@
-import { data, json, LoaderFunctionArgs } from "@remix-run/node";
+import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { fetchApi } from "~/core/utils/fetch_api";
 import { AddTransactionPageContainer } from "~/features/transaction/components/add_transaction/add_transaction_page_container";
 import { AddOutcomePageContent } from "~/features/transaction/components/outcome/add_outcome_page_content";
 import { OutcomeDetailProvider } from "~/features/transaction/lib/context/detail_transaction_context";
+import { getTransactionDetail } from "~/features/transaction/lib/utils/get_transaction_details";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const fruitRes = await fetchApi<StuffType[], "GET">(
@@ -59,4 +60,25 @@ export default function AddOutcome() {
       </AddTransactionPageContainer>
     </OutcomeDetailProvider>
   );
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const body = await request.formData();
+
+  const data = {
+    transactionTime: body.get("transactionTime"),
+    details: getTransactionDetail<AddOutcomeDetailType>(body),
+  };
+
+  const result = await fetchApi(
+    request,
+    `/outcome`,
+    "POST",
+    "menambah data Pengeluaran",
+    data
+  );
+
+  console.log(result);
+
+  return null;
 }

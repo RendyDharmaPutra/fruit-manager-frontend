@@ -1,3 +1,4 @@
+import { Form } from "@remix-run/react";
 import { PageContainer } from "~/core/components/layout/page_layout/page_container";
 
 type AddTransactionPageContainerProps<T> = {
@@ -15,9 +16,9 @@ export const AddTransactionPageContainer = <T,>(
       loaderData={props.loaderData}
     >
       {(successData) => (
-        <div className="p-content flex flex-col gap-4 md:gap-8">
+        <Form method="POST" className="p-content flex flex-col gap-4 md:gap-8">
           {props.children(successData)}
-        </div>
+        </Form>
       )}
     </PageContainer>
   );

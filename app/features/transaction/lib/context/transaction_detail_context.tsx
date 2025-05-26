@@ -8,6 +8,8 @@ import {
 
 export function createTransactionDetailContext<T>() {
   type ContextType = {
+    totalPrice: number;
+    setTotalPrice: Dispatch<SetStateAction<number>>;
     selectedDetail: T[];
     setSelectedDetail: Dispatch<SetStateAction<T[]>>;
   };
@@ -16,9 +18,12 @@ export function createTransactionDetailContext<T>() {
 
   function SelectedDetailProvider({ children }: { children: React.ReactNode }) {
     const [selectedDetail, setSelectedDetail] = useState<T[]>([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     return (
-      <Context.Provider value={{ selectedDetail, setSelectedDetail }}>
+      <Context.Provider
+        value={{ totalPrice, setTotalPrice, selectedDetail, setSelectedDetail }}
+      >
         {children}
       </Context.Provider>
     );
