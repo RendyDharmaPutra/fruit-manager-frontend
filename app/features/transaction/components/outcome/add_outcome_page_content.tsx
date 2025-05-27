@@ -2,7 +2,7 @@ import { AddTransactionInfo } from "../add_transaction/add_transaction_info";
 import { AddOutcomeDetails } from "./add_outcome_details";
 import { OutcomeFormDialog } from "../dialog/outcome_form_dialog";
 import { useOutcomeDetail } from "../../lib/context/detail_transaction_context";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useTransactionValidation } from "../../lib/context/transaction_validation_context";
 import { updateValidationError } from "~/core/lib/hooks/update_validation_error";
 
@@ -19,16 +19,17 @@ export const AddOutcomePageContent = <T extends RawResponseType>(
 ) => {
   const { selectedDetail, totalPrice } = useOutcomeDetail();
 
-  const outcomeDetail = useMemo(() => {
-    return selectedDetail.map((detail) => {
+  const outcomeDetailCallback = useCallback(
+    <TDetail extends (typeof selectedDetail)[number]>(detail: TDetail) => {
       return {
         fertilizerId: detail.fertilizer.id!,
         fruitId: detail.fruit.id!,
         count: detail.count,
         price: detail.price,
       };
-    });
-  }, [selectedDetail]);
+    },
+    []
+  );
 
   const { setValidationError } = useTransactionValidation();
 
@@ -39,7 +40,8 @@ export const AddOutcomePageContent = <T extends RawResponseType>(
       <AddTransactionInfo
         title="Pengeluaran"
         totalPrice={totalPrice}
-        data={outcomeDetail}
+        data={selectedDetail}
+        transactionDetailCallback={outcomeDetailCallback}
       />
       <AddOutcomeDetails />
       <OutcomeFormDialog data={props.data} />
