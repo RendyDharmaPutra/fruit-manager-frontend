@@ -1,4 +1,4 @@
-import { useOutcomeDetail } from "../../lib/context/detail_transaction_context";
+import { useOutcomeDetail } from "../../lib/context/outcome_detail_context";
 import { AddTransactionDetails } from "../add_transaction/add_transaction_details";
 import { AddOutcomeDetailCard } from "./add_outcome_detail_card";
 

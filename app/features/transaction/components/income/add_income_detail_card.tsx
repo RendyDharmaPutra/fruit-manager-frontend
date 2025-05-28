@@ -1,15 +1,15 @@
 import { X } from "lucide-react";
-import { useOutcomeDetail } from "../../lib/context/outcome_detail_context";
+import { useIncomeDetail } from "../../lib/context/income_detail_context";
 import { DetailCardHeader } from "../detail_card/detail_card_header";
 import { DetailCardContent } from "../detail_card/detail_card_content";
 import { DetailCardFooter } from "../detail_card/detail_card_footer";
 
-type AddOutcomeDetailCardProps = {
-  detail: DetailOfOutcomeType;
+type AddIncomeDetailCardProps = {
+  detail: DetailOfIncomeType;
 };
 
-export const AddOutcomeDetailCard = (props: AddOutcomeDetailCardProps) => {
-  const { setSelectedDetail } = useOutcomeDetail();
+export const AddIncomeDetailCard = (props: AddIncomeDetailCardProps) => {
+  const { setSelectedDetail } = useIncomeDetail();
 
   return (
     <div className="relative px-4 py-3 flex flex-col gap-2 md:gap-4 w-full min-w-[220px] max-w-full h-fulls rounded-md border">
@@ -25,16 +25,11 @@ export const AddOutcomeDetailCard = (props: AddOutcomeDetailCardProps) => {
         <X className="w-4 h-4" />
       </button>
 
-      <DetailCardHeader fruitName={props.detail.fruit.name}>
-        <p className="text-sm text-gray-700">
-          untuk Buah{" "}
-          <span className="font-semibold">{props.detail.fertilizer.name}</span>
-        </p>
-      </DetailCardHeader>
+      <DetailCardHeader fruitName={props.detail.fruit.name} />
       <DetailCardContent
-        price={props.detail.fertilizer.price}
-        label="Kuantitas"
-        value={props.detail.count}
+        price={props.detail.fruit.price}
+        label="Berat"
+        value={props.detail.weight}
       />
       <DetailCardFooter price={props.detail.price} />
     </div>

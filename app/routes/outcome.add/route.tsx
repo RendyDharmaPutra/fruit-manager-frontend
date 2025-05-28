@@ -3,7 +3,7 @@ import { useActionData, useLoaderData } from "@remix-run/react";
 import { fetchApi } from "~/core/utils/fetch_api";
 import { AddTransactionPageContainer } from "~/features/transaction/components/add_transaction/add_transaction_page_container";
 import { AddOutcomePageContent } from "~/features/transaction/components/outcome/add_outcome_page_content";
-import { OutcomeDetailProvider } from "~/features/transaction/lib/context/detail_transaction_context";
+import { OutcomeDetailProvider } from "~/features/transaction/lib/context/outcome_detail_context";
 import { getTransactionDetail } from "~/features/transaction/lib/utils/get_transaction_details";
 
 export async function loader({ request }: LoaderFunctionArgs) {
