@@ -13,7 +13,7 @@ type DateFieldProps = {
 };
 
 export const DateField = (props: DateFieldProps) => {
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<Date>(new Date());
 
   return (
     <>
@@ -34,7 +34,9 @@ export const DateField = (props: DateFieldProps) => {
           <Calendar
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={(selected) => {
+              if (selected) setDate(selected);
+            }}
             initialFocus
           />
         </PopoverContent>
