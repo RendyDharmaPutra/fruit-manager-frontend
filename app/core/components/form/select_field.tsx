@@ -9,16 +9,18 @@ import {
 } from "~/core/components/ui/select";
 import { Label } from "../ui/label";
 
-type SelectFieldProps = {
+type SelectFieldProps<T extends { id?: string | number; name: string }> = {
   id: string;
   title: string;
-  data: StuffType[];
+  data: T[];
   onChange?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const SelectField = (props: SelectFieldProps) => {
+export const SelectField = <T extends { id?: string | number; name: string }>(
+  props: SelectFieldProps<T>
+) => {
   return (
-    <>
+    <div className="relative flex flex-col items-start gap-4 w-full">
       <Label htmlFor={props.id} className="-mb-2.5">
         {props.title}
       </Label>
@@ -37,6 +39,6 @@ export const SelectField = (props: SelectFieldProps) => {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </>
+    </div>
   );
 };

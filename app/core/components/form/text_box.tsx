@@ -14,13 +14,13 @@ type TextBoxProps = {
 
 export const TextBox: React.FC<TextBoxProps> = (props) => {
   return (
-    <div className="relative flex flex-col items-start gap-1.5 ">
+    <div className="relative flex flex-col items-start gap-1.5 w-full">
       <Label htmlFor={props.id}>{props.label}</Label>
       <Input
         type={props.type}
         id={props.id}
         name={props.id}
-        placeholder={`Masukkan ${props.label}`}
+        placeholder={props.placeholder ?? `Masukkan ${props.label}`}
         defaultValue={props.defaultValue}
         onChange={(e) => props.onChange?.(Number(e.target.value))}
       />

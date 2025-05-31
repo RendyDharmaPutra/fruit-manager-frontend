@@ -1,46 +1,26 @@
-import { AddTransactionInfo } from "../add_transaction/add_transaction_info";
-import { useCallback } from "react";
 import { useTransactionValidation } from "../../lib/context/transaction_validation_context";
 import { updateValidationError } from "~/core/lib/hooks/update_validation_error";
-import { useIncomeDetail } from "../../lib/context/income_detail_context";
 import { IncomeFormDialog } from "../dialog/income_form_dialog";
 import { AddIncomeDetails } from "./add_income_details";
+import { AddIncomeInfo } from "./add_income_info";
 
 type AddIncomePageContentProps<T> = {
   actionRes?: T;
-  data: StuffType[];
+  data: { fuel: StuffType[]; fruit: StuffType[] };
 };
 
 export const AddIncomePageContent = <T extends RawResponseType>(
   props: AddIncomePageContentProps<T>
 ) => {
-  const { selectedDetail, totalPrice } = useIncomeDetail();
-
-  const incomeDetailCallback = useCallback(
-    <TDetail extends (typeof selectedDetail)[number]>(detail: TDetail) => {
-      return {
-        fruitId: detail.fruit.id!,
-        weight: detail.weight,
-        price: detail.price,
-      };
-    },
-    []
-  );
-
   const { setValidationError } = useTransactionValidation();
 
   updateValidationError(setValidationError, props.actionRes);
 
   return (
     <>
-      <AddTransactionInfo
-        title="Pemasukan"
-        totalPrice={totalPrice}
-        data={selectedDetail}
-        transactionDetailCallback={incomeDetailCallback}
-      />
+      <AddIncomeInfo fuel={props.data.fuel} />
       <AddIncomeDetails />
-      <IncomeFormDialog data={props.data} />
+      <IncomeFormDialog data={props.data.fruit} />
     </>
   );
 };

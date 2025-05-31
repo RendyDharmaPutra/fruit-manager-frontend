@@ -11,16 +11,14 @@ import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog
 import { SelectField } from "~/core/components/form/select_field";
 import { useState } from "react";
 
-type TransactionFormDialogProps<T> = {
+type TransactionFormDialogProps = {
   title: "Pengeluaran" | "Pemasukan";
   fruit: StuffType[];
   handleSubmit: (fruit: StuffType) => void;
   children: React.ReactNode;
 };
 
-export const TransactionFormDialog = <T,>(
-  props: TransactionFormDialogProps<T>
-) => {
+export const TransactionFormDialog = (props: TransactionFormDialogProps) => {
   const [selectedFruit, setSelectedFruit] = useState("");
 
   const { open, setOpen } = useDeleteDialog();

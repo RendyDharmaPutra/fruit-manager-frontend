@@ -14,7 +14,36 @@ export async function loader({ request }: LoaderFunctionArgs) {
     "mendapatkan data Buah"
   );
 
-  return fruitRes;
+  const fuelRes = await fetchApi<StuffType[], "GET">(
+    request,
+    `/fuel`,
+    "GET",
+    "mendapatkan data Bensin"
+  );
+
+  const success = fruitRes.success && fuelRes.success;
+
+  if (!success) {
+    const errorMessage = !fruitRes.success ? fruitRes.message : fuelRes.message;
+
+    return json<FailedResponseType<string>>(
+      {
+        success: false,
+        message: errorMessage,
+        error: "Gagal memuat salah satu data",
+      },
+      { status: 500 }
+    );
+  }
+
+  return json<SuccessResponseType<{ fruit: StuffType[]; fuel: StuffType[] }>>({
+    success: true,
+    message: `${fruitRes.message} dan ${fuelRes.message}`,
+    data: {
+      fruit: fruitRes.data.data!,
+      fuel: fuelRes.data.data!,
+    },
+  });
 }
 
 export default function AddIncomePage() {
@@ -31,7 +60,7 @@ export default function AddIncomePage() {
         {(successData) => (
           <AddIncomePageContent
             actionRes={actionData}
-            data={successData.data.data}
+            data={successData.data}
           />
         )}
       </AddTransactionPageContainer>
