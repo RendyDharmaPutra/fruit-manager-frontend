@@ -13,7 +13,7 @@ export const AddIncomeInfo = (props: IncomeInfoProps) => {
 
   const getDistributionValue = useCallback(() => {
     return String(distribution);
-  }, []);
+  }, [distribution]);
 
   const { selectedDetail, totalPrice } = useIncomeDetail();
 
@@ -47,6 +47,7 @@ export const AddIncomeInfo = (props: IncomeInfoProps) => {
           name="distribution"
           value={getDistributionValue()}
         />
+        <input type="hidden" name="totalPrice" value={totalPrice} />
 
         {distribution && <IncomeDistributionInfo fuel={props.fuel} />}
       </section>

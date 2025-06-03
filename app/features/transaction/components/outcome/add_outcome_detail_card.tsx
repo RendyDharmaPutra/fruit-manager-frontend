@@ -9,17 +9,19 @@ type AddOutcomeDetailCardProps = {
 };
 
 export const AddOutcomeDetailCard = (props: AddOutcomeDetailCardProps) => {
-  const { setSelectedDetail } = useOutcomeDetail();
+  const { setSelectedDetail, setTotalPrice } = useOutcomeDetail();
 
   return (
     <div className="relative px-4 py-3 flex flex-col gap-2 md:gap-4 w-full min-w-[220px] max-w-full h-fulls rounded-md border">
       <button
         type="button"
-        onClick={() =>
+        onClick={() => {
           setSelectedDetail((prev) =>
             prev.filter((prev) => prev !== props.detail)
-          )
-        }
+          );
+
+          setTotalPrice((prev) => prev - props.detail.price);
+        }}
         className="absolute top-1 right-1 p-1 rounded-md hover:bg-gray-200 duration-300"
       >
         <X className="w-4 h-4" />

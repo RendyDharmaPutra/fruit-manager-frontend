@@ -73,14 +73,16 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const data = {
     transactionTime: body.get("transactionTime"),
+    distribution: Boolean(body.get("distribution")),
+    totalPrice: Number(body.get("totalPrice")),
     details: getTransactionDetail<AddOutcomeDetailType>(body),
   };
 
   return await fetchApi(
     request,
-    `/outcome`,
+    `/income`,
     "POST",
-    "menambah data Pengeluaran",
+    "menambah data Pemasukan",
     data
   );
 }
