@@ -36,6 +36,7 @@ export const AddTransactionInfo = <T, R>(
         placeholder="Waktu Transaksi"
         error={getFirstError(validationError?.transactionTime)}
       />
+      <input type="hidden" name="totalPrice" value={props.totalPrice} />
       <input
         type="hidden"
         name="details"
@@ -53,6 +54,11 @@ export const AddTransactionInfo = <T, R>(
             {currencyFormat(props.totalPrice)}
           </h6>
         </div>
+        {validationError?.totalPrice && (
+          <p className="text-xs text-danger">
+            {validationError?.totalPrice[0]}
+          </p>
+        )}
         {validationError?.details && (
           <p className="text-xs text-danger">{validationError?.details[0]}</p>
         )}

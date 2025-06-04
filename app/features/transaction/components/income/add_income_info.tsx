@@ -47,7 +47,6 @@ export const AddIncomeInfo = (props: IncomeInfoProps) => {
           name="distribution"
           value={getDistributionValue()}
         />
-        <input type="hidden" name="totalPrice" value={totalPrice} />
 
         {distribution && <IncomeDistributionInfo fuel={props.fuel} />}
       </section>

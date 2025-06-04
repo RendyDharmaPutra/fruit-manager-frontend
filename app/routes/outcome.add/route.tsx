@@ -77,6 +77,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const data = {
     transactionTime: body.get("transactionTime"),
+    totalPrice: Number(body.get("totalPrice")),
     details: getTransactionDetail<AddOutcomeDetailType>(body),
   };
 

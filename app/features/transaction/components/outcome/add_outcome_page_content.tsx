@@ -2,7 +2,7 @@ import { AddTransactionInfo } from "../add_transaction/add_transaction_info";
 import { AddOutcomeDetails } from "./add_outcome_details";
 import { OutcomeFormDialog } from "../dialog/outcome_form_dialog";
 import { useOutcomeDetail } from "../../lib/context/outcome_detail_context";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useTransactionValidation } from "../../lib/context/transaction_validation_context";
 import { updateValidationError } from "~/core/lib/hooks/update_validation_error";
 
