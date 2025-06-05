@@ -13,7 +13,8 @@ export const DetailCardContent = (props: DetailCardContentProps) => {
         {currencyFormat(props.price)}
       </p>
       <p className="text-sm text-gray-700">
-        {props.label}: {props.value}
+        {props.label}: {props.value}{" "}
+        {props.label === "Kuantitas" ? "Buah" : "Ons"}
       </p>
     </section>
   );

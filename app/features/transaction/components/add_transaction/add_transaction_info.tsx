@@ -21,7 +21,7 @@ export const AddTransactionInfo = <T, R>(
   // Parsing menjadi bentuk details untuk dikirimkan ke API
   const transactionDetail = useMemo(() => {
     return props.data.map(props.transactionDetailCallback);
-  }, [props.data]);
+  }, [props.data, props.transactionDetailCallback]);
 
   return (
     <section className="p-4 flex flex-col gap-4 md:gap-8 w-full rounded-lg border">

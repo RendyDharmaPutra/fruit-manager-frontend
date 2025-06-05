@@ -17,6 +17,7 @@ export const TextBox: React.FC<TextBoxProps> = (props) => {
     <div className="relative flex flex-col items-start gap-1.5 w-full">
       <Label htmlFor={props.id}>{props.label}</Label>
       <Input
+        required
         type={props.type}
         id={props.id}
         name={props.id}

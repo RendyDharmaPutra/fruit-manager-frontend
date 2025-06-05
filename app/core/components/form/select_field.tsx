@@ -24,7 +24,7 @@ export const SelectField = <T extends { id?: string | number; name: string }>(
       <Label htmlFor={props.id} className="-mb-2.5">
         {props.title}
       </Label>
-      <Select onValueChange={props.onChange}>
+      <Select required onValueChange={props.onChange}>
         <SelectTrigger id={props.id} className="w-full">
           <SelectValue placeholder={`Pilih ${props.title}`} />
         </SelectTrigger>

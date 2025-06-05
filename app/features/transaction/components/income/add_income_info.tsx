@@ -11,10 +11,6 @@ type IncomeInfoProps = {
 export const AddIncomeInfo = (props: IncomeInfoProps) => {
   const [distribution, setDistribution] = useState(false);
 
-  const getDistributionValue = useCallback(() => {
-    return String(distribution);
-  }, [distribution]);
-
   const { selectedDetail, totalPrice } = useIncomeDetail();
 
   const incomeDetailCallback = useCallback(
@@ -45,7 +41,7 @@ export const AddIncomeInfo = (props: IncomeInfoProps) => {
         <input
           type="hidden"
           name="distribution"
-          value={getDistributionValue()}
+          value={distribution.toString()}
         />
 
         {distribution && <IncomeDistributionInfo fuel={props.fuel} />}

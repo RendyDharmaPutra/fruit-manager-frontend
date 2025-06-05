@@ -1,6 +1,13 @@
-import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  json,
+  LoaderFunctionArgs,
+  redirect,
+} from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
+import { fetchAi } from "~/core/utils/fetch_ai";
 import { fetchApi } from "~/core/utils/fetch_api";
+import { rearrangeDate } from "~/core/utils/formatter/date_format";
 import { AddTransactionPageContainer } from "~/features/transaction/components/add_transaction/add_transaction_page_container";
 import { AddIncomePageContent } from "~/features/transaction/components/income/add_income_page_content";
 import { IncomeDetailProvider } from "~/features/transaction/lib/context/income_detail_context";
@@ -71,18 +78,40 @@ export default function AddIncomePage() {
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.formData();
 
-  const data = {
-    transactionTime: body.get("transactionTime"),
-    distribution: Boolean(body.get("distribution")),
+  const incomeData = {
+    transactionTime: String(body.get("transactionTime")),
+    distribution: body.get("distribution") === "true",
     totalPrice: Number(body.get("totalPrice")),
-    details: getTransactionDetail<AddOutcomeDetailType>(body),
+    details: getTransactionDetail<AddIncomeDetailType>(body),
   };
 
-  return await fetchApi(
+  if (incomeData.distribution) {
+    const distributionData = {
+      distance: Number(body.get("distance")),
+      weather: Number(body.get("weather")),
+      fuelPrice: Number(body.get("fuel")),
+      totalWeight: incomeData.details.reduce(
+        (acc, detail) => acc + detail.weight,
+        0
+      ),
+      transactionTime: rearrangeDate(incomeData.transactionTime),
+      totalPrice: incomeData.totalPrice,
+    };
+
+    const finalPrice = await fetchAi(distributionData);
+
+    incomeData.totalPrice = finalPrice.total_harga;
+  }
+
+  const result = await fetchApi(
     request,
     `/income`,
     "POST",
     "menambah data Pemasukan",
-    data
+    incomeData
   );
+
+  if (result.success) return redirect("/income");
+
+  return result;
 }
