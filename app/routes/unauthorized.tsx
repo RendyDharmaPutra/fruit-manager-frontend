@@ -24,13 +24,13 @@ export default function UnauthorizedPage() {
         <section className="flex center w-full ">
           <Button
             onClick={() => {
-              navigate(-1);
+              navigate("/fruit");
             }}
             type="button"
             variant={"link"}
           >
             <ArrowLeft />
-            Kembali ke Halaman sebelumnya
+            Kembali ke Halaman Utama
           </Button>
         </section>
       </section>

@@ -6,7 +6,9 @@ import { NavMenuBtn } from "./nav_menu_btn";
 import { useState } from "react";
 import { LogoutDialog } from "../../dialog/logout_dialog";
 
-type NavigationBarProps = {};
+type NavigationBarProps = {
+  user: UserPayload;
+};
 
 export const NavigationBar = (props: NavigationBarProps) => {
   const [open, setOpen] = useState(false);
@@ -17,9 +19,11 @@ export const NavigationBar = (props: NavigationBarProps) => {
       <nav className="sticky inset-0 z-50 px-8 py-4 md:py-6 flex flex-row items-center gap-4 w-full bg-white border border-gray-300">
         <NavMenuBtn action={setOpen} />
         <NavigationHeader />
-        <NavigationLarge setShowLogout={setShowLogout} />
+        <NavigationLarge setShowLogout={setShowLogout} user={props.user} />
       </nav>
-      {open && <NavigationSmall setShowLogout={setShowLogout} />}
+      {open && (
+        <NavigationSmall setShowLogout={setShowLogout} user={props.user} />
+      )}
       <LogoutDialog open={showLogout} setOpen={setShowLogout} />
     </>
   );

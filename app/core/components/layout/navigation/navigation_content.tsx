@@ -6,7 +6,7 @@ import {
 import { NavigationItem } from "./navigation_item";
 import { NavigationListItem } from "./navigation_list_item";
 
-const managementRoutes = [
+const managementRoutesForManager = [
   {
     name: "Buah",
     route: "/fruit",
@@ -21,7 +21,7 @@ const managementRoutes = [
   },
 ];
 
-const transactionRoutes = [
+const transactionRoutesForManager = [
   {
     name: "Pemasukan",
     route: "/income",
@@ -32,7 +32,35 @@ const transactionRoutes = [
   },
 ];
 
+const managementRoutesForCashier = [
+  {
+    name: "Buah",
+    route: "/fruit",
+  },
+  {
+    name: "Bensin",
+    route: "/fuel",
+  },
+];
+
+const transactionRoutesForCashier = [
+  {
+    name: "Pemasukan",
+    route: "/income",
+  },
+];
+
 export const NavigationContent = (props: NavigationContentProps) => {
+  const managementRoutes =
+    props.user.role === "MANAGER"
+      ? managementRoutesForManager
+      : managementRoutesForCashier;
+
+  const transactionRoutes =
+    props.user.role === "MANAGER"
+      ? transactionRoutesForManager
+      : transactionRoutesForCashier;
+
   return (
     <>
       <NavigationItem route="/" name="Beranda" />

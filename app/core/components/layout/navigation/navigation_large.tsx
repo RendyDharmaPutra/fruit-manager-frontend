@@ -10,7 +10,10 @@ export const NavigationLarge = (props: NavigationLargeProps) => {
   return (
     <NavigationMenu className="flex-1 hidden lg:flex justify-end items-center">
       <NavigationMenuList className="hidden lg:flex flex-row gap-6 center">
-        <NavigationContent setShowLogout={props.setShowLogout} />
+        <NavigationContent
+          setShowLogout={props.setShowLogout}
+          user={props.user}
+        />
       </NavigationMenuList>
     </NavigationMenu>
   );

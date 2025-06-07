@@ -1,16 +1,23 @@
 import {
+  json,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useLocation,
 } from "@remix-run/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 
 import "./tailwind.css";
 import { Toaster } from "./core/components/ui/toaster";
 import { NavigationBar } from "./core/components/layout/navigation/navigation_bar";
+import { validateRequest } from "./core/utils/auth/validate_request";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,8 +39,14 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export async function loader({ request }: LoaderFunctionArgs) {
+  const user = await validateRequest(request);
+  return json({ user });
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
+  const { user } = useLoaderData<typeof loader>();
 
   return (
     <html lang="en">
@@ -44,7 +57,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {location.pathname !== "/login" && <NavigationBar />}
+        {location.pathname !== "/login" && <NavigationBar user={user!} />}
         {children}
         <Toaster />
         <ScrollRestoration />

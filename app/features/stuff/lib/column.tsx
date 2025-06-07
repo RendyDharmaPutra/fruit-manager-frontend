@@ -4,6 +4,7 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "~/core/components/ui/button";
 import { TableActionStuff } from "../components/table_action_stuff";
 import { currencyFormat } from "~/core/utils/formatter/currenty_format";
+import { Authorized } from "~/core/components/container/authorized";
 
 export const stuffColumns: ColumnDef<StuffType>[] = [
   {
@@ -36,7 +37,11 @@ export const stuffColumns: ColumnDef<StuffType>[] = [
     cell: ({ row }) => {
       const data = row.original;
 
-      return <TableActionStuff data={data} />;
+      return (
+        <Authorized roles={"MANAGER"}>
+          <TableActionStuff data={data} />
+        </Authorized>
+      );
     },
   },
 ];

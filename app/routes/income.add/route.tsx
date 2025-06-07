@@ -5,6 +5,7 @@ import {
   redirect,
 } from "@remix-run/node";
 import { useActionData, useLoaderData } from "@remix-run/react";
+import { validateRequest } from "~/core/utils/auth/validate_request";
 import { fetchAi } from "~/core/utils/fetch_ai";
 import { fetchApi } from "~/core/utils/fetch_api";
 import { rearrangeDate } from "~/core/utils/formatter/date_format";
@@ -14,6 +15,9 @@ import { IncomeDetailProvider } from "~/features/transaction/lib/context/income_
 import { getTransactionDetail } from "~/features/transaction/lib/utils/get_transaction_details";
 
 export async function loader({ request }: LoaderFunctionArgs) {
+  const user = await validateRequest(request);
+  if (user!.role === "MANAGER") throw redirect("/unauthorized");
+
   const fruitRes = await fetchApi<StuffType[], "GET">(
     request,
     `/fruit`,

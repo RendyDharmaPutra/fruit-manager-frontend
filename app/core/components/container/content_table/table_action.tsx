@@ -8,6 +8,8 @@ import {
 import { Button } from "../../ui/button";
 import { MoreHorizontal, Trash } from "lucide-react";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
+import { useLocation } from "@remix-run/react";
+import { useAuth } from "~/core/lib/hooks/use_auth";
 
 type TableActionProps = {
   setSelectedItem: () => void;
@@ -15,6 +17,9 @@ type TableActionProps = {
 };
 
 export const TableAction = (props: TableActionProps) => {
+  const location = useLocation();
+  const user = useAuth();
+
   const { setOpen } = useDeleteDialog();
 
   return (
@@ -29,16 +34,18 @@ export const TableAction = (props: TableActionProps) => {
         <DropdownMenuLabel>Aksi</DropdownMenuLabel>
         {props.children}
 
-        <DropdownMenuItem
-          onClick={() => {
-            props.setSelectedItem();
-            setOpen(true);
-          }}
-          className="text-danger"
-        >
-          <Trash />
-          Hapus
-        </DropdownMenuItem>
+        {!(location.pathname === "/income" && user.role === "CASHIER") && (
+          <DropdownMenuItem
+            onClick={() => {
+              props.setSelectedItem();
+              setOpen(true);
+            }}
+            className="text-danger"
+          >
+            <Trash />
+            Hapus
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

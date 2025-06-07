@@ -5,6 +5,9 @@ import { redirect, useActionData } from "@remix-run/react";
 import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
 import { authCookies } from "~/core/utils/auth/cookie";
 import { LoginValidateProvider } from "~/features/login/context/login_validdate_error_context";
+import { commitSession, getSession } from "~/core/utils/auth/session";
+import { setAuthSession } from "~/core/utils/auth/set_auth_session";
+import { jwtParse } from "~/core/utils/auth/jwt_parse";
 
 export default function Login() {
   const actionRes = useActionData<typeof action>();
@@ -31,10 +34,19 @@ export async function action({ request }: ActionFunctionArgs) {
   const res = await loginAction(user);
 
   if (res.success) {
+    const token = res.data.token;
+
+    const session = await getSession();
+
+    const payload = await jwtParse(token);
+    setAuthSession(session, payload);
+
+    const headers = new Headers();
+    headers.append("Set-Cookie", await authCookies.serialize(token));
+    headers.append("Set-Cookie", await commitSession(session));
+
     return redirect("/", {
-      headers: {
-        "Set-Cookie": await authCookies.serialize(res.data.token),
-      },
+      headers,
     });
   }
 

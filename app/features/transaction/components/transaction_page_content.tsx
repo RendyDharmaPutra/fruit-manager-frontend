@@ -5,6 +5,8 @@ import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog
 import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
 import { ColumnDef } from "@tanstack/react-table";
 import { ContentTableBody } from "../../../core/components/container/content_table/content_table_body";
+import { useLocation } from "@remix-run/react";
+import { useAuth } from "~/core/lib/hooks/use_auth";
 
 type TransactionPageContentProps<T, R> = {
   title: "Pemasukan" | "Pengeluaran";
@@ -16,6 +18,9 @@ type TransactionPageContentProps<T, R> = {
 export const TransactionPageContent = <T, R extends RawResponseType>(
   props: TransactionPageContentProps<T, R>
 ) => {
+  const location = useLocation();
+  const user = useAuth();
+
   const { open, setOpen } = useDeleteDialog();
 
   const { selectedItem } = useSelectedTransaction();
@@ -27,10 +32,12 @@ export const TransactionPageContent = <T, R extends RawResponseType>(
       columns={props.transactionColumns}
       data={props.loaderData.data.data}
     >
-      <ContentTableAdd
-        title={props.title}
-        route={`/${props.title === "Pemasukan" ? "income" : "outcome"}`}
-      />
+      {!(location.pathname === "/income" && user.role === "MANAGER") && (
+        <ContentTableAdd
+          title={props.title}
+          route={`/${props.title === "Pemasukan" ? "income" : "outcome"}`}
+        />
+      )}
       <DeleteDialog
         id={selectedItem!}
         name="code"
