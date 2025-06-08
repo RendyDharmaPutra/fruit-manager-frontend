@@ -24,7 +24,7 @@ export default function UnauthorizedPage() {
         <section className="flex center w-full ">
           <Button
             onClick={() => {
-              navigate("/fruit");
+              navigate("/");
             }}
             type="button"
             variant={"link"}

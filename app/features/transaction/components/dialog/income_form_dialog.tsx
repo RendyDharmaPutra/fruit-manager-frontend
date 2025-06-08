@@ -13,7 +13,7 @@ export const IncomeFormDialog = (props: IncomeFormDialogProps) => {
 
   return (
     <TransactionFormDialog
-      title="Pengeluaran"
+      title="Pemasukan"
       fruit={props.data}
       handleSubmit={handleSubmit}
     >
