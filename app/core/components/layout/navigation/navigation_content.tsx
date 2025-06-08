@@ -63,8 +63,6 @@ export const NavigationContent = (props: NavigationContentProps) => {
 
   return (
     <>
-      <NavigationItem route="/" name="Beranda" />
-
       <NavigationMenuItem className="relative navigation-item">
         <NavigationMenuTrigger className="flex items-center w-full">
           Manajemen
