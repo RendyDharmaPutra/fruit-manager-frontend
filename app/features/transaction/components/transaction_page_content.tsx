@@ -2,11 +2,12 @@ import { useSelectedTransaction } from "~/features/transaction/lib/context/selec
 import { ContentTableAdd } from "../../../core/components/container/content_table/content_table_add";
 import { DeleteDialog } from "../../../core/components/dialog/delete_dialog";
 import { useDeleteDialog } from "~/core/lib/context/dialog_context/delete_dialog_context";
-import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
 import { ColumnDef } from "@tanstack/react-table";
 import { ContentTableBody } from "../../../core/components/container/content_table/content_table_body";
 import { useLocation } from "@remix-run/react";
 import { useAuth } from "~/core/lib/hooks/use_auth";
+import { useEffect } from "react";
+import { showStandardToast } from "~/core/lib/hooks/show_standard_toast";
 
 type TransactionPageContentProps<T, R> = {
   title: "Pemasukan" | "Pengeluaran";
@@ -25,7 +26,11 @@ export const TransactionPageContent = <T, R extends RawResponseType>(
 
   const { selectedItem } = useSelectedTransaction();
 
-  props.actionRes != undefined && showStandardToast(props.actionRes);
+  useEffect(() => {
+    if (props.actionRes != undefined) {
+      showStandardToast(props.actionRes);
+    }
+  }, [props.actionRes]);
 
   return (
     <ContentTableBody

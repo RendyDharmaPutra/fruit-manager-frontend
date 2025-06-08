@@ -8,11 +8,16 @@ import { LoginValidateProvider } from "~/features/login/context/login_validdate_
 import { commitSession, getSession } from "~/core/utils/auth/session";
 import { setAuthSession } from "~/core/utils/auth/set_auth_session";
 import { jwtParse } from "~/core/utils/auth/jwt_parse";
+import { useEffect } from "react";
 
 export default function Login() {
   const actionRes = useActionData<typeof action>();
 
-  actionRes !== undefined && showStandardToast(actionRes);
+  useEffect(() => {
+    if (actionRes != undefined) {
+      showStandardToast(actionRes);
+    }
+  }, [actionRes]);
 
   return (
     <LoginValidateProvider>
