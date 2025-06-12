@@ -67,7 +67,7 @@ export const NavigationContent = (props: NavigationContentProps) => {
         <NavigationMenuTrigger className="flex items-center w-full">
           Manajemen
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="absolute top-10 right-0 p-2 bg-white shadow-md rounded-md">
+        <NavigationMenuContent className="absolute top-10 right-0 p-2 bg-background shadow-md rounded-md">
           <ul className="grid gap-2 w-40">
             {managementRoutes.map((item) => (
               <NavigationListItem
@@ -84,7 +84,7 @@ export const NavigationContent = (props: NavigationContentProps) => {
         <NavigationMenuTrigger className="flex items-center w-full">
           Transaksi
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="absolute top-10 right-0 p-2 bg-white shadow-md rounded-md">
+        <NavigationMenuContent className="absolute top-10 right-0 p-2 bg-background shadow-md rounded-md">
           <ul className="grid gap-2 w-40">
             {transactionRoutes.map((item) => (
               <NavigationListItem
