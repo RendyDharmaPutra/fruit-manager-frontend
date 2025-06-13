@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
-import { useActionData, useLoaderData } from "@remix-run/react";
+import { redirect, useActionData, useLoaderData } from "@remix-run/react";
 import { fetchApi } from "~/core/utils/fetch_api";
 import { AddTransactionPageContainer } from "~/features/transaction/components/add_transaction/add_transaction_page_container";
 import { AddOutcomePageContent } from "~/features/transaction/components/outcome/add_outcome_page_content";
@@ -81,11 +81,15 @@ export async function action({ request }: ActionFunctionArgs) {
     details: getTransactionDetail<AddOutcomeDetailType>(body),
   };
 
-  return await fetchApi(
+  const result = await fetchApi(
     request,
     `/outcome`,
     "POST",
     "menambah data Pengeluaran",
     data
   );
+
+  if (result.success) return redirect("/outcome");
+
+  return result;
 }
